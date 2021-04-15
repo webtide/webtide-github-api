@@ -1,0 +1,654 @@
+[
+  {
+    "sha": "bdb4dd435e18336c61f67d270004e17696481bc3",
+    "node_id": "MDY6Q29tbWl0MjA0NTIwNzpiZGI0ZGQ0MzVlMTgzMzZjNjFmNjdkMjcwMDA0ZTE3Njk2NDgxYmMz",
+    "commit": {
+      "author": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-16T15:09:45Z"
+      },
+      "committer": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-16T15:09:45Z"
+      },
+      "message": "Issue #5675 Update some osgi test dependencies\n\nSigned-off-by: Jan Bartel <janb@webtide.com>",
+      "tree": {
+        "sha": "e53f99b51439ffcaa259376daf5b0877dd6756aa",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/git/trees/e53f99b51439ffcaa259376daf5b0877dd6756aa"
+      },
+      "url": "https://api.github.com/repos/eclipse/jetty.project/git/commits/bdb4dd435e18336c61f67d270004e17696481bc3",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/eclipse/jetty.project/commits/bdb4dd435e18336c61f67d270004e17696481bc3",
+    "html_url": "https://github.com/eclipse/jetty.project/commit/bdb4dd435e18336c61f67d270004e17696481bc3",
+    "comments_url": "https://api.github.com/repos/eclipse/jetty.project/commits/bdb4dd435e18336c61f67d270004e17696481bc3/comments",
+    "author": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "850a0330ff25da42b1b1cbdbdca0fcc0c40e47e9",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/850a0330ff25da42b1b1cbdbdca0fcc0c40e47e9",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/850a0330ff25da42b1b1cbdbdca0fcc0c40e47e9"
+      }
+    ]
+  },
+  {
+    "sha": "c8af99e6c6a33f75eb927bb860d00f301289f430",
+    "node_id": "MDY6Q29tbWl0MjA0NTIwNzpjOGFmOTllNmM2YTMzZjc1ZWI5MjdiYjg2MGQwMGYzMDEyODlmNDMw",
+    "commit": {
+      "author": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-17T14:51:09Z"
+      },
+      "committer": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-17T14:51:09Z"
+      },
+      "message": "Merge remote-tracking branch 'origin/jetty-9.4.x' into jetty-9.4.x-5675-update-osgi-test-deps",
+      "tree": {
+        "sha": "dabbcc98f68a2bac7172d3ceb6ee332c793b6a08",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/git/trees/dabbcc98f68a2bac7172d3ceb6ee332c793b6a08"
+      },
+      "url": "https://api.github.com/repos/eclipse/jetty.project/git/commits/c8af99e6c6a33f75eb927bb860d00f301289f430",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/eclipse/jetty.project/commits/c8af99e6c6a33f75eb927bb860d00f301289f430",
+    "html_url": "https://github.com/eclipse/jetty.project/commit/c8af99e6c6a33f75eb927bb860d00f301289f430",
+    "comments_url": "https://api.github.com/repos/eclipse/jetty.project/commits/c8af99e6c6a33f75eb927bb860d00f301289f430/comments",
+    "author": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "bdb4dd435e18336c61f67d270004e17696481bc3",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/bdb4dd435e18336c61f67d270004e17696481bc3",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/bdb4dd435e18336c61f67d270004e17696481bc3"
+      },
+      {
+        "sha": "1d71cabef4dc8b80a3b4376375f402ddc991545b",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/1d71cabef4dc8b80a3b4376375f402ddc991545b",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/1d71cabef4dc8b80a3b4376375f402ddc991545b"
+      }
+    ]
+  },
+  {
+    "sha": "f911dbcd5d65bc9cae745b29a37bb38c6d77284c",
+    "node_id": "MDY6Q29tbWl0MjA0NTIwNzpmOTExZGJjZDVkNjViYzljYWU3NDViMjlhMzdiYjM4YzZkNzcyODRj",
+    "commit": {
+      "author": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-23T09:07:22Z"
+      },
+      "committer": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-23T09:07:22Z"
+      },
+      "message": "Issue #5675 update osgi platform version\n\nSigned-off-by: Jan Bartel <janb@webtide.com>",
+      "tree": {
+        "sha": "947c851986f6cbb7a0625ddee5342a5e175b52ad",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/git/trees/947c851986f6cbb7a0625ddee5342a5e175b52ad"
+      },
+      "url": "https://api.github.com/repos/eclipse/jetty.project/git/commits/f911dbcd5d65bc9cae745b29a37bb38c6d77284c",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/eclipse/jetty.project/commits/f911dbcd5d65bc9cae745b29a37bb38c6d77284c",
+    "html_url": "https://github.com/eclipse/jetty.project/commit/f911dbcd5d65bc9cae745b29a37bb38c6d77284c",
+    "comments_url": "https://api.github.com/repos/eclipse/jetty.project/commits/f911dbcd5d65bc9cae745b29a37bb38c6d77284c/comments",
+    "author": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "c8af99e6c6a33f75eb927bb860d00f301289f430",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/c8af99e6c6a33f75eb927bb860d00f301289f430",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/c8af99e6c6a33f75eb927bb860d00f301289f430"
+      }
+    ]
+  },
+  {
+    "sha": "e730c274a73e463ccf3892e2ff203b369b74dd53",
+    "node_id": "MDY6Q29tbWl0MjA0NTIwNzplNzMwYzI3NGE3M2U0NjNjY2YzODkyZTJmZjIwM2IzNjliNzRkZDUz",
+    "commit": {
+      "author": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-24T16:20:56Z"
+      },
+      "committer": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-24T16:20:56Z"
+      },
+      "message": "Issue 5675 Also update osgi services to newest version.\n\nSigned-off-by: Jan Bartel <janb@webtide.com>",
+      "tree": {
+        "sha": "04cbc954035e5796819932949bea31ac658a05ea",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/git/trees/04cbc954035e5796819932949bea31ac658a05ea"
+      },
+      "url": "https://api.github.com/repos/eclipse/jetty.project/git/commits/e730c274a73e463ccf3892e2ff203b369b74dd53",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/eclipse/jetty.project/commits/e730c274a73e463ccf3892e2ff203b369b74dd53",
+    "html_url": "https://github.com/eclipse/jetty.project/commit/e730c274a73e463ccf3892e2ff203b369b74dd53",
+    "comments_url": "https://api.github.com/repos/eclipse/jetty.project/commits/e730c274a73e463ccf3892e2ff203b369b74dd53/comments",
+    "author": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "f911dbcd5d65bc9cae745b29a37bb38c6d77284c",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/f911dbcd5d65bc9cae745b29a37bb38c6d77284c",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/f911dbcd5d65bc9cae745b29a37bb38c6d77284c"
+      }
+    ]
+  },
+  {
+    "sha": "4aac7f03f1a08292c37598125427a619defbfb49",
+    "node_id": "MDY6Q29tbWl0MjA0NTIwNzo0YWFjN2YwM2YxYTA4MjkyYzM3NTk4MTI1NDI3YTYxOWRlZmJmYjQ5",
+    "commit": {
+      "author": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-25T13:30:10Z"
+      },
+      "committer": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-25T13:30:10Z"
+      },
+      "message": "Merge remote-tracking branch 'origin/jetty-9.4.x' into jetty-9.4.x-5675-update-osgi-test-deps",
+      "tree": {
+        "sha": "04867b36c5e710cbaff29b086e2ee036cd45c91d",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/git/trees/04867b36c5e710cbaff29b086e2ee036cd45c91d"
+      },
+      "url": "https://api.github.com/repos/eclipse/jetty.project/git/commits/4aac7f03f1a08292c37598125427a619defbfb49",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/eclipse/jetty.project/commits/4aac7f03f1a08292c37598125427a619defbfb49",
+    "html_url": "https://github.com/eclipse/jetty.project/commit/4aac7f03f1a08292c37598125427a619defbfb49",
+    "comments_url": "https://api.github.com/repos/eclipse/jetty.project/commits/4aac7f03f1a08292c37598125427a619defbfb49/comments",
+    "author": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e730c274a73e463ccf3892e2ff203b369b74dd53",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/e730c274a73e463ccf3892e2ff203b369b74dd53",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/e730c274a73e463ccf3892e2ff203b369b74dd53"
+      },
+      {
+        "sha": "36d7a909308746d5b42f1214253dda68753b6ddf",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/36d7a909308746d5b42f1214253dda68753b6ddf",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/36d7a909308746d5b42f1214253dda68753b6ddf"
+      }
+    ]
+  },
+  {
+    "sha": "e45ab8a61b63ac0ea57babdb6e2a3a19b4cfe022",
+    "node_id": "MDY6Q29tbWl0MjA0NTIwNzplNDVhYjhhNjFiNjNhYzBlYTU3YmFiZGI2ZTJhM2ExOWI0Y2ZlMDIy",
+    "commit": {
+      "author": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-25T21:21:54Z"
+      },
+      "committer": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-25T21:21:54Z"
+      },
+      "message": "Issue #5675 Make property for osgi utils.\n\nSigned-off-by: Jan Bartel <janb@webtide.com>",
+      "tree": {
+        "sha": "b1c41a6161f3233910704d5de176e8dfc0be50fa",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/git/trees/b1c41a6161f3233910704d5de176e8dfc0be50fa"
+      },
+      "url": "https://api.github.com/repos/eclipse/jetty.project/git/commits/e45ab8a61b63ac0ea57babdb6e2a3a19b4cfe022",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/eclipse/jetty.project/commits/e45ab8a61b63ac0ea57babdb6e2a3a19b4cfe022",
+    "html_url": "https://github.com/eclipse/jetty.project/commit/e45ab8a61b63ac0ea57babdb6e2a3a19b4cfe022",
+    "comments_url": "https://api.github.com/repos/eclipse/jetty.project/commits/e45ab8a61b63ac0ea57babdb6e2a3a19b4cfe022/comments",
+    "author": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "4aac7f03f1a08292c37598125427a619defbfb49",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/4aac7f03f1a08292c37598125427a619defbfb49",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/4aac7f03f1a08292c37598125427a619defbfb49"
+      }
+    ]
+  },
+  {
+    "sha": "21893bfb01847e502579d8f43dc8cd0f5fe32572",
+    "node_id": "MDY6Q29tbWl0MjA0NTIwNzoyMTg5M2JmYjAxODQ3ZTUwMjU3OWQ4ZjQzZGM4Y2QwZjVmZTMyNTcy",
+    "commit": {
+      "author": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-30T13:45:27Z"
+      },
+      "committer": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-11-30T13:45:27Z"
+      },
+      "message": "Merge remote-tracking branch 'origin/jetty-9.4.x' into jetty-9.4.x-5675-update-osgi-test-deps",
+      "tree": {
+        "sha": "dc4b49af9012155bc8eb0535ac0ce3eb02ae21a9",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/git/trees/dc4b49af9012155bc8eb0535ac0ce3eb02ae21a9"
+      },
+      "url": "https://api.github.com/repos/eclipse/jetty.project/git/commits/21893bfb01847e502579d8f43dc8cd0f5fe32572",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/eclipse/jetty.project/commits/21893bfb01847e502579d8f43dc8cd0f5fe32572",
+    "html_url": "https://github.com/eclipse/jetty.project/commit/21893bfb01847e502579d8f43dc8cd0f5fe32572",
+    "comments_url": "https://api.github.com/repos/eclipse/jetty.project/commits/21893bfb01847e502579d8f43dc8cd0f5fe32572/comments",
+    "author": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e45ab8a61b63ac0ea57babdb6e2a3a19b4cfe022",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/e45ab8a61b63ac0ea57babdb6e2a3a19b4cfe022",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/e45ab8a61b63ac0ea57babdb6e2a3a19b4cfe022"
+      },
+      {
+        "sha": "b4e2ad0df7cff104388e468b54b9c23c17a2ad0f",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/b4e2ad0df7cff104388e468b54b9c23c17a2ad0f",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/b4e2ad0df7cff104388e468b54b9c23c17a2ad0f"
+      }
+    ]
+  },
+  {
+    "sha": "7ad620a462407b05a843b6a6e9ad1cfb4beafde3",
+    "node_id": "MDY6Q29tbWl0MjA0NTIwNzo3YWQ2MjBhNDYyNDA3YjA1YTg0M2I2YTZlOWFkMWNmYjRiZWFmZGUz",
+    "commit": {
+      "author": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-12-01T14:00:42Z"
+      },
+      "committer": {
+        "name": "Jan Bartel",
+        "email": "janb@webtide.com",
+        "date": "2020-12-01T14:00:42Z"
+      },
+      "message": "Merge remote-tracking branch 'origin/jetty-9.4.x' into jetty-9.4.x-5675-update-osgi-test-deps",
+      "tree": {
+        "sha": "a569207ff51f4d02107b1bc48858e0f0eb0232d2",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/git/trees/a569207ff51f4d02107b1bc48858e0f0eb0232d2"
+      },
+      "url": "https://api.github.com/repos/eclipse/jetty.project/git/commits/7ad620a462407b05a843b6a6e9ad1cfb4beafde3",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/eclipse/jetty.project/commits/7ad620a462407b05a843b6a6e9ad1cfb4beafde3",
+    "html_url": "https://github.com/eclipse/jetty.project/commit/7ad620a462407b05a843b6a6e9ad1cfb4beafde3",
+    "comments_url": "https://api.github.com/repos/eclipse/jetty.project/commits/7ad620a462407b05a843b6a6e9ad1cfb4beafde3/comments",
+    "author": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "janbartel",
+      "id": 342406,
+      "node_id": "MDQ6VXNlcjM0MjQwNg==",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/342406?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/janbartel",
+      "html_url": "https://github.com/janbartel",
+      "followers_url": "https://api.github.com/users/janbartel/followers",
+      "following_url": "https://api.github.com/users/janbartel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/janbartel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/janbartel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/janbartel/subscriptions",
+      "organizations_url": "https://api.github.com/users/janbartel/orgs",
+      "repos_url": "https://api.github.com/users/janbartel/repos",
+      "events_url": "https://api.github.com/users/janbartel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/janbartel/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "21893bfb01847e502579d8f43dc8cd0f5fe32572",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/21893bfb01847e502579d8f43dc8cd0f5fe32572",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/21893bfb01847e502579d8f43dc8cd0f5fe32572"
+      },
+      {
+        "sha": "51d96eced890c29e282fb2d67cdb1e67eb3b83dd",
+        "url": "https://api.github.com/repos/eclipse/jetty.project/commits/51d96eced890c29e282fb2d67cdb1e67eb3b83dd",
+        "html_url": "https://github.com/eclipse/jetty.project/commit/51d96eced890c29e282fb2d67cdb1e67eb3b83dd"
+      }
+    ]
+  }
+]

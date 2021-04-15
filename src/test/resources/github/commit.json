@@ -1,0 +1,134 @@
+{
+  "sha": "9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22",
+  "node_id": "MDY6Q29tbWl0MjA0NTIwNzo5YzNjZmI5MmY5M2U1YzVmMmM1NGFjNTUwOWI4N2ZkMzlkMjAxZjIy",
+  "commit": {
+    "author": {
+      "name": "Mattias Andersson",
+      "email": "mattias.j.andersson@gmail.com",
+      "date": "2020-03-10T00:33:13Z"
+    },
+    "committer": {
+      "name": "GitHub",
+      "email": "noreply@github.com",
+      "date": "2020-03-10T00:33:13Z"
+    },
+    "message": "Issue #4647 Hazelcast remote.xml configuration file do not configure hazelcast remote addresses  (#4649)\n\n* Fix for #4647\r\n\r\nSigned-off-by: Mattias Andersson <andermaj@gmail.com>\r\n\r\nCo-authored-by: Mattias Andersson <andermaj@gmail.com>",
+    "tree": {
+      "sha": "aea7f2e4e24f00e9e02d6c35bd5d42db7da22a00",
+      "url": "https://api.github.com/repos/eclipse/jetty.project/git/trees/aea7f2e4e24f00e9e02d6c35bd5d42db7da22a00"
+    },
+    "url": "https://api.github.com/repos/eclipse/jetty.project/git/commits/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22",
+    "comment_count": 0,
+    "verification": {
+      "verified": true,
+      "reason": "valid",
+      "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJeZuBJCRBK7hj4Ov3rIwAAdHIIAHVVQ7CtPj+6NizKLOoEVSyl\nBTLOwGB/gfeoHqHoDidtZaYlnB4p5bShd5jIBbjq/maSeZ9ikwTopDs2TFYZzOiL\ngSkZBXzB94jdjw9GySdzlR3Yq84zfUQQAuAY6/fxJeMYNGpzBb0ZKQEVh6ZPY57C\nYvvPhCT2XMVH2hNXON8Iz8hCILj/rsWd8uPPYoubV48bBnTq9tjzMRdtcUoNKzGO\nYYinSs6WK4Hqm1ToRcB2GE+ADacDfnXrsfSWlbdjxkLX7f8ydiV1L5xOHIGXM/5a\nBCRw4bWjI3rQhDK5fHBqQ7H1LsAegcFNu8bd+wsKcLaZ87gpuOc8qFqcKBVd038=\n=b8dl\n-----END PGP SIGNATURE-----\n",
+      "payload": "tree aea7f2e4e24f00e9e02d6c35bd5d42db7da22a00\nparent dfd3875dbc1c1f423f424515feadccf66f2a041c\nauthor Mattias Andersson <mattias.j.andersson@gmail.com> 1583800393 +0100\ncommitter GitHub <noreply@github.com> 1583800393 +1000\n\nIssue #4647 Hazelcast remote.xml configuration file do not configure hazelcast remote addresses  (#4649)\n\n* Fix for #4647\r\n\r\nSigned-off-by: Mattias Andersson <andermaj@gmail.com>\r\n\r\nCo-authored-by: Mattias Andersson <andermaj@gmail.com>"
+    }
+  },
+  "url": "https://api.github.com/repos/eclipse/jetty.project/commits/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22",
+  "html_url": "https://github.com/eclipse/jetty.project/commit/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22",
+  "comments_url": "https://api.github.com/repos/eclipse/jetty.project/commits/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22/comments",
+  "author": {
+    "login": "attiand",
+    "id": 1533269,
+    "node_id": "MDQ6VXNlcjE1MzMyNjk=",
+    "avatar_url": "https://avatars0.githubusercontent.com/u/1533269?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/attiand",
+    "html_url": "https://github.com/attiand",
+    "followers_url": "https://api.github.com/users/attiand/followers",
+    "following_url": "https://api.github.com/users/attiand/following{/other_user}",
+    "gists_url": "https://api.github.com/users/attiand/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/attiand/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/attiand/subscriptions",
+    "organizations_url": "https://api.github.com/users/attiand/orgs",
+    "repos_url": "https://api.github.com/users/attiand/repos",
+    "events_url": "https://api.github.com/users/attiand/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/attiand/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "web-flow",
+    "id": 19864447,
+    "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+    "avatar_url": "https://avatars3.githubusercontent.com/u/19864447?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/web-flow",
+    "html_url": "https://github.com/web-flow",
+    "followers_url": "https://api.github.com/users/web-flow/followers",
+    "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+    "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+    "organizations_url": "https://api.github.com/users/web-flow/orgs",
+    "repos_url": "https://api.github.com/users/web-flow/repos",
+    "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/web-flow/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "dfd3875dbc1c1f423f424515feadccf66f2a041c",
+      "url": "https://api.github.com/repos/eclipse/jetty.project/commits/dfd3875dbc1c1f423f424515feadccf66f2a041c",
+      "html_url": "https://github.com/eclipse/jetty.project/commit/dfd3875dbc1c1f423f424515feadccf66f2a041c"
+    }
+  ],
+  "stats": {
+    "total": 26,
+    "additions": 23,
+    "deletions": 3
+  },
+  "files": [
+    {
+      "sha": "cf0b516e1e381ba31c644785da8fd00d6d8da915",
+      "filename": "jetty-hazelcast/src/main/config/etc/sessions/hazelcast/remote.xml",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 1,
+      "changes": 3,
+      "blob_url": "https://github.com/eclipse/jetty.project/blob/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22/jetty-hazelcast/src/main/config/etc/sessions/hazelcast/remote.xml",
+      "raw_url": "https://github.com/eclipse/jetty.project/raw/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22/jetty-hazelcast/src/main/config/etc/sessions/hazelcast/remote.xml",
+      "contents_url": "https://api.github.com/repos/eclipse/jetty.project/contents/jetty-hazelcast/src/main/config/etc/sessions/hazelcast/remote.xml?ref=9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22",
+      "patch": "@@ -5,7 +5,7 @@\n \n   <!-- ===================================================================== -->\n   <!-- Configure a factory for HazelcastSessionDataStore using               -->\n-  <!-- an embedded Hazelcast Instance                                        -->\n+  <!-- an remote Hazelcast Instance                                        -->\n   <!-- ===================================================================== -->\n   <Call name=\"addBean\">\n     <Arg>\n@@ -16,6 +16,7 @@\n         <Set name=\"gracePeriodSec\"><Property name=\"jetty.session.gracePeriod.seconds\" default=\"3600\" /></Set>\n         <Set name=\"savePeriodSec\"><Property name=\"jetty.session.savePeriod.seconds\" default=\"0\" /></Set>\n         <Set name=\"onlyClient\"><Property name=\"jetty.session.hazelcast.onlyClient\" default=\"true\" /></Set>\n+        <Set name=\"addresses\"><Property name=\"jetty.session.hazelcast.addresses\" default=\"\" /></Set>\n       </New>\n     </Arg>\n   </Call>"
+    },
+    {
+      "sha": "3b5970948a5fcf69bec3691bc4ee83e724c4b14e",
+      "filename": "jetty-hazelcast/src/main/config/modules/session-store-hazelcast-embedded.mod",
+      "status": "modified",
+      "additions": 0,
+      "deletions": 1,
+      "changes": 1,
+      "blob_url": "https://github.com/eclipse/jetty.project/blob/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22/jetty-hazelcast/src/main/config/modules/session-store-hazelcast-embedded.mod",
+      "raw_url": "https://github.com/eclipse/jetty.project/raw/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22/jetty-hazelcast/src/main/config/modules/session-store-hazelcast-embedded.mod",
+      "contents_url": "https://api.github.com/repos/eclipse/jetty.project/contents/jetty-hazelcast/src/main/config/modules/session-store-hazelcast-embedded.mod?ref=9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22",
+      "patch": "@@ -31,7 +31,6 @@ http://www.apache.org/licenses/LICENSE-2.0.html\n [ini-template]\n jetty.session.hazelcast.mapName=jetty-distributed-session-map\n jetty.session.hazelcast.hazelcastInstanceName=JETTY_DISTRIBUTED_SESSION_INSTANCE\n-#jetty.session.hazelcast.configurationLocation=\n jetty.session.hazelcast.scavengeZombies=false\n jetty.session.gracePeriod.seconds=3600\n jetty.session.savePeriod.seconds=0"
+    },
+    {
+      "sha": "9bf4db8f795199d3b441863015cdd548240f8885",
+      "filename": "jetty-hazelcast/src/main/config/modules/session-store-hazelcast-remote.mod",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/eclipse/jetty.project/blob/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22/jetty-hazelcast/src/main/config/modules/session-store-hazelcast-remote.mod",
+      "raw_url": "https://github.com/eclipse/jetty.project/raw/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22/jetty-hazelcast/src/main/config/modules/session-store-hazelcast-remote.mod",
+      "contents_url": "https://api.github.com/repos/eclipse/jetty.project/contents/jetty-hazelcast/src/main/config/modules/session-store-hazelcast-remote.mod?ref=9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22",
+      "patch": "@@ -34,6 +34,6 @@ jetty.session.hazelcast.mapName=jetty-distributed-session-map\n jetty.session.hazelcast.hazelcastInstanceName=JETTY_DISTRIBUTED_SESSION_INSTANCE\n jetty.session.hazelcast.onlyClient=true\n jetty.session.hazelcast.scavengeZombies=false\n-#jetty.session.hazelcast.configurationLocation=\n jetty.session.gracePeriod.seconds=3600\n jetty.session.savePeriod.seconds=0\n+#jetty.session.hazelcast.addresses="
+    },
+    {
+      "sha": "6c9bed49ed733cf3eb1cc65bd2b018c9d3032e84",
+      "filename": "jetty-hazelcast/src/main/java/org/eclipse/jetty/hazelcast/session/HazelcastSessionDataStoreFactory.java",
+      "status": "modified",
+      "additions": 20,
+      "deletions": 0,
+      "changes": 20,
+      "blob_url": "https://github.com/eclipse/jetty.project/blob/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22/jetty-hazelcast/src/main/java/org/eclipse/jetty/hazelcast/session/HazelcastSessionDataStoreFactory.java",
+      "raw_url": "https://github.com/eclipse/jetty.project/raw/9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22/jetty-hazelcast/src/main/java/org/eclipse/jetty/hazelcast/session/HazelcastSessionDataStoreFactory.java",
+      "contents_url": "https://api.github.com/repos/eclipse/jetty.project/contents/jetty-hazelcast/src/main/java/org/eclipse/jetty/hazelcast/session/HazelcastSessionDataStoreFactory.java?ref=9c3cfb92f93e5c5f2c54ac5509b87fd39d201f22",
+      "patch": "@@ -19,6 +19,7 @@\n package org.eclipse.jetty.hazelcast.session;\n \n import java.io.IOException;\n+import java.util.Arrays;\n \n import com.hazelcast.client.HazelcastClient;\n import com.hazelcast.client.config.ClientConfig;\n@@ -29,6 +30,7 @@\n import com.hazelcast.config.XmlConfigBuilder;\n import com.hazelcast.core.Hazelcast;\n import com.hazelcast.core.HazelcastInstance;\n+\n import org.eclipse.jetty.server.session.AbstractSessionDataStoreFactory;\n import org.eclipse.jetty.server.session.SessionData;\n import org.eclipse.jetty.server.session.SessionDataStore;\n@@ -57,6 +59,8 @@\n \n     private boolean scavengeZombies = false;\n \n+    private String addresses;\n+    \n     public boolean isScavengeZombies()\n     {\n         return scavengeZombies;\n@@ -82,6 +86,12 @@ public SessionDataStore getSessionDataStore(SessionHandler handler)\n                     if (configurationLocation == null)\n                     {\n                         ClientConfig config = new ClientConfig();\n+                        \n+                        if (addresses != null && !addresses.isEmpty())\n+                        {\n+                            config.getNetworkConfig().setAddresses(Arrays.asList(addresses.split(\",\")));\n+                        }\n+                        \n                         SerializerConfig sc = new SerializerConfig()\n                             .setImplementation(new SessionDataSerializer())\n                             .setTypeClass(SessionData.class);\n@@ -202,4 +212,14 @@ public void setHazelcastInstanceName(String hazelcastInstanceName)\n     {\n         this.hazelcastInstanceName = hazelcastInstanceName;\n     }\n+    \n+    public String getAddresses()\n+    {\n+        return addresses;\n+    }\n+\n+    public void setAddresses(String addresses)\n+    {\n+        this.addresses = addresses;\n+    }\n }"
+    }
+  ]
+}
