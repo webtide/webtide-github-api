@@ -36,6 +36,7 @@ import com.google.common.base.Strings;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.webtide.tools.github.cache.PersistentCache;
 import net.webtide.tools.github.gson.ISO8601TypeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +65,7 @@ public class GitHubApi
         this.baseRequest = HttpRequest.newBuilder()
             .header("Authorization", "Bearer " + oauthToken);
         this.gson = newGson();
-        this.cache = new Cache();
+        this.cache = new PersistentCache();
     }
 
     public static GitHubApi connect()
@@ -133,15 +134,12 @@ public class GitHubApi
         try
         {
             String body = cache.getCached(path);
-            LOG.debug("Returning Cached from {}", path);
-            return body;
-        }
-        catch (GitHubResourceNotFoundException e)
-        {
-            throw e;
-        }
-        catch (IOException e)
-        {
+            if (body != null)
+            {
+                LOG.debug("Returning Cached from {}", path);
+                return body;
+            }
+
             RateLeft rateLeft = getRateLeft();
             int remainingRate = rateLeft.applyRequest("core");
             URI uri = apiURI.resolve(path);
@@ -159,6 +157,10 @@ public class GitHubApi
                 default:
                     throw new GitHubApiException("Unable to get [" + path + "]: status code: " + response.statusCode());
             }
+        }
+        catch (GitHubResourceNotFoundException e)
+        {
+            throw e;
         }
     }
 
