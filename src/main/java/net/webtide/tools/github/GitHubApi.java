@@ -36,7 +36,7 @@ import com.google.common.base.Strings;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.webtide.tools.github.cache.PersistentCache;
+import net.webtide.tools.github.cache.MemoryCache;
 import net.webtide.tools.github.gson.ISO8601TypeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class GitHubApi
     private final HttpClient client;
     private final HttpRequest.Builder baseRequest;
     private final Gson gson;
-    private final Cache cache;
+    private Cache cache;
 
     private RateLeft rateLeft;
 
@@ -65,7 +65,7 @@ public class GitHubApi
         this.baseRequest = HttpRequest.newBuilder()
             .header("Authorization", "Bearer " + oauthToken);
         this.gson = newGson();
-        this.cache = new PersistentCache();
+        this.cache = new MemoryCache();
     }
 
     public static GitHubApi connect()
@@ -122,6 +122,16 @@ public class GitHubApi
             .registerTypeAdapter(ZonedDateTime.class, new ISO8601TypeAdapter())
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .create();
+    }
+
+    public Cache getCache()
+    {
+        return cache;
+    }
+
+    public void setCache(Cache cache)
+    {
+        this.cache = cache;
     }
 
     public String raw(String path, Function<HttpRequest.Builder, HttpRequest> requestBuilder) throws IOException, InterruptedException
@@ -290,6 +300,26 @@ public class GitHubApi
     public Stream<Release> streamReleases(String repoOwner, String repoName, int resultsPerPage)
     {
         return StreamSupport.stream(new ListReleasesSpliterator(this, repoOwner, repoName, resultsPerPage), false);
+    }
+
+    public Repositories listRepositories(String repoOwner, int resultsPerPage, int pageNum) throws IOException, InterruptedException
+    {
+        Query query = new Query();
+        query.put("per_page", String.valueOf(resultsPerPage));
+        query.put("page", String.valueOf(pageNum));
+
+        String path = String.format("/orgs/%s/repos?%s", repoOwner, query.toEncodedQuery());
+
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, Repositories.class);
+    }
+
+    public Stream<Repository> streamRepositories(String repoOrg, int resultsPerPage)
+    {
+        return StreamSupport.stream(new ListRepositoriesSpliterator(this, repoOrg, resultsPerPage), false);
     }
 
     static class Query extends HashMap<String, String>
