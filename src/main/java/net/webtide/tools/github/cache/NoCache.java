@@ -32,13 +32,13 @@ public class NoCache implements Cache
     }
 
     @Override
-    public void saveNotFound(String path) throws IOException
+    public void saveNotFound(String path)
     {
         notFoundSet.add(path);
     }
 
     @Override
-    public void save(String path, String body) throws IOException
+    public void save(String path, String body)
     {
         // do nothing
     }
