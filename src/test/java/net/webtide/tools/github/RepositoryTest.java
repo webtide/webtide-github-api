@@ -3,9 +3,12 @@ package net.webtide.tools.github;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import net.webtide.tools.github.cache.PersistentCache;
+import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +21,7 @@ public class RepositoryTest
     public void listRepositoriesTest()
     {
         GitHubApi github = GitHubApi.connect();
+        github.setCache(new PersistentCache(MavenTestingUtils.getTargetTestingPath()));
         Stream<Repository> repositoryStream = github.streamRepositories("webtide", 10);
 
         assertNotNull(repositoryStream);
@@ -28,6 +32,40 @@ public class RepositoryTest
             repoNames.add(repo.getName());
         });
         assertThat(repoNames, Matchers.hasItem("logos"));
+    }
+
+    @Test
+    public void listRepositoryCollaborators()
+    {
+        GitHubApi github = GitHubApi.connect();
+        github.setCache(new PersistentCache(MavenTestingUtils.getTargetTestingPath()));
+        Stream<User> collaborators = github.streamRepositoryCollaborators("webtide", "jenkins-slave", 10);
+
+        assertNotNull(collaborators);
+        Set<String> userNames = new HashSet<>();
+        collaborators.forEach((collaborator) ->
+        {
+            System.out.printf("%s - [%s]%n", collaborator.getLogin(), getPermissions(collaborator));
+            userNames.add(collaborator.getName());
+        });
+    }
+
+    private String getPermissions(User collaborator)
+    {
+        List<String> perms = new ArrayList<>();
+        if (collaborator.isSiteAdmin())
+            perms.add("SITE_ADMIN");
+        if (collaborator.getPermissions() != null)
+        {
+            for (Map.Entry<String, Boolean> entry : collaborator.getPermissions().entrySet())
+            {
+                if (entry.getValue())
+                {
+                    perms.add("perm." + entry.getKey());
+                }
+            }
+        }
+        return String.join(", ", perms);
     }
 
     private String getFlags(Repository repo)

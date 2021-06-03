@@ -13,6 +13,7 @@
 package net.webtide.tools.github;
 
 import java.time.ZonedDateTime;
+import java.util.Map;
 
 public class User
 {
@@ -23,6 +24,8 @@ public class User
     protected String location;
     protected String email;
     protected String bio;
+    protected boolean siteAdmin;
+    protected Map<String, Boolean> permissions;
     protected ZonedDateTime createdAt;
     protected ZonedDateTime updatedAt;
 
@@ -69,5 +72,15 @@ public class User
     public ZonedDateTime getUpdatedAt()
     {
         return updatedAt;
+    }
+
+    public boolean isSiteAdmin()
+    {
+        return siteAdmin;
+    }
+
+    public Map<String, Boolean> getPermissions()
+    {
+        return permissions;
     }
 }

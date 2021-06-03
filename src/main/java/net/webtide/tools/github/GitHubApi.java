@@ -38,6 +38,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.webtide.tools.github.cache.MemoryCache;
 import net.webtide.tools.github.gson.ISO8601TypeAdapter;
+import net.webtide.tools.github.iters.ListUsersSpliterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -320,6 +321,27 @@ public class GitHubApi
     public Stream<Repository> streamRepositories(String repoOrg, int resultsPerPage)
     {
         return StreamSupport.stream(new ListRepositoriesSpliterator(this, repoOrg, resultsPerPage), false);
+    }
+
+    public Users listRepositoryCollaborators(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
+    {
+        Query query = new Query();
+        query.put("per_page", String.valueOf(resultsPerPage));
+        query.put("page", String.valueOf(pageNum));
+
+        String path = String.format("/repos/%s/%s/collaborators?%s", repoOwner, repoName, query.toEncodedQuery());
+
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, Users.class);
+    }
+
+    public Stream<User> streamRepositoryCollaborators(String repoOwner, String repoName, int resultsPerPage)
+    {
+        return StreamSupport.stream(new ListUsersSpliterator((pageNum) ->
+            listRepositoryCollaborators(repoOwner, repoName, resultsPerPage, pageNum)), false);
     }
 
     static class Query extends HashMap<String, String>

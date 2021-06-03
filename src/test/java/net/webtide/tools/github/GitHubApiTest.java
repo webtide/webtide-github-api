@@ -23,7 +23,6 @@ public class GitHubApiTest
     {
         GitHubApi api = GitHubApi.connect();
         String path = "/repos/eclipse/jetty.project/pulls/5676/commits";
-        // String path = "/repos/eclipse/jetty.project/issues/5675/events";
         String body = api.raw(path, (requestBuilder) ->
             requestBuilder.GET()
                 .header("Accept", "application/vnd.github.v3+json")
