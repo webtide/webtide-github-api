@@ -1,0 +1,19 @@
+<settings>
+  <mirrors>
+    <!-- this mirror is more friendly to the default maven repo, but not very fast.
+         the builds takes 2 minutes on this one -->
+    <mirror>
+      <id>google-maven-central</id>
+      <name>GCS Maven Central mirror</name>
+      <url>https://maven-central.storage-download.googleapis.com/maven2/</url>
+      <mirrorOf>alt-central</mirrorOf>
+    </mirror>
+    <!-- build takes 28 seconds with this one -->
+    <mirror>
+      <id>sonatype-maven-central</id>
+      <name>Sonatype Maven Central mirror</name>
+      <url>https://repo1.maven.org/maven2/</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+</settings>
