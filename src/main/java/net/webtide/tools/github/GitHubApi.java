@@ -38,6 +38,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.webtide.tools.github.cache.MemoryCache;
 import net.webtide.tools.github.gson.ISO8601TypeAdapter;
+import net.webtide.tools.github.iters.ListReleasesSpliterator;
+import net.webtide.tools.github.iters.ListRepositoriesSpliterator;
 import net.webtide.tools.github.iters.ListUsersSpliterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -10,7 +10,7 @@
 // ========================================================================
 //
 
-package net.webtide.tools.github;
+package net.webtide.tools.github.iters;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,48 +18,54 @@ import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class ListRepositoriesSpliterator implements Spliterator<Repository>
+import net.webtide.tools.github.GitHubApi;
+import net.webtide.tools.github.Release;
+import net.webtide.tools.github.Releases;
+
+public class ListReleasesSpliterator implements Spliterator<Release>
 {
     private final GitHubApi github;
     private final String repoOwner;
+    private final String repoName;
     private final int perPage;
-    private final List<Repository> activeRepositories = new ArrayList<>();
+    private final List<Release> activeReleases = new ArrayList<>();
     private int activeOffset = Integer.MAX_VALUE; // already past end at start, to trigger fetch of next releases page
     private int activePage = 1;
 
-    public ListRepositoriesSpliterator(GitHubApi gitHubApi, String repoOwner, int perPage)
+    public ListReleasesSpliterator(GitHubApi gitHubApi, String repoOwner, String repoName, int perPage)
     {
         this.github = gitHubApi;
         this.repoOwner = repoOwner;
+        this.repoName = repoName;
         this.perPage = perPage;
     }
 
     @Override
-    public boolean tryAdvance(Consumer<? super Repository> action)
+    public boolean tryAdvance(Consumer<? super Release> action)
     {
-        Repository repository = getNextRepository();
-        if (repository == null)
+        Release release = getNextRelease();
+        if (release == null)
             return false;
         else
         {
-            action.accept(repository);
+            action.accept(release);
             return true;
         }
     }
 
-    private Repository getNextRepository()
+    private Release getNextRelease()
     {
-        if (activeOffset >= activeRepositories.size())
+        if (activeOffset >= activeReleases.size())
         {
             try
             {
-                activeRepositories.clear();
-                while (activeRepositories.isEmpty())
+                activeReleases.clear();
+                while (activeReleases.isEmpty())
                 {
-                    Repositories releases = github.listRepositories(repoOwner, perPage, activePage++);
+                    Releases releases = github.listReleases(repoOwner, repoName, perPage, activePage++);
                     if ((releases == null) || releases.isEmpty())
                         return null;
-                    activeRepositories.addAll(releases);
+                    activeReleases.addAll(releases);
                     activeOffset = 0;
                 }
             }
@@ -73,16 +79,16 @@ public class ListRepositoriesSpliterator implements Spliterator<Repository>
             }
         }
 
-        if (activeRepositories.isEmpty())
+        if (activeReleases.isEmpty())
         {
             return null;
         }
 
-        return activeRepositories.get(activeOffset++);
+        return activeReleases.get(activeOffset++);
     }
 
     @Override
-    public Spliterator<Repository> trySplit()
+    public Spliterator<Release> trySplit()
     {
         return null;
     }
