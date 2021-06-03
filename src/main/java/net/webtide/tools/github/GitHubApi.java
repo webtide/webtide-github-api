@@ -74,6 +74,12 @@ public class GitHubApi
     public static GitHubApi connect()
     {
         String githubAppToken = System.getenv("GITHUB_TOKEN");
+        if (Strings.isNullOrEmpty(githubAppToken))
+        {
+            // try alternate name
+            githubAppToken = System.getenv("GITHUB_OAUTH");
+        }
+
         if (!Strings.isNullOrEmpty(githubAppToken))
         {
             LOG.info("Connecting to GitHub with AppInstallation Token");
