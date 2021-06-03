@@ -170,6 +170,9 @@ public class GitHubApi
                 case 200:
                     cache.save(path, response.body());
                     return response.body();
+                case 403:
+                    cache.saveNotFound(path);
+                    throw new GitHubNotPermittedException("Not permitted to get [" + path + "]: status code: " + response.statusCode());
                 case 404:
                     cache.saveNotFound(path);
                     throw new GitHubResourceNotFoundException(path);

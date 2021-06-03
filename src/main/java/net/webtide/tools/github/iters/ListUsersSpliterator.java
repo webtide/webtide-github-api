@@ -20,6 +20,8 @@ import java.util.function.Consumer;
 
 import net.webtide.tools.github.User;
 import net.webtide.tools.github.Users;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ListUsersSpliterator implements Spliterator<User>
 {
@@ -28,6 +30,7 @@ public class ListUsersSpliterator implements Spliterator<User>
         Users getUsers(int page) throws IOException, InterruptedException;
     }
 
+    private static final Logger LOG = LoggerFactory.getLogger(ListUsersSpliterator.class);
     private final Function listUsersFunction;
     private final List<User> activeUsers = new ArrayList<>();
     private int activeOffset = Integer.MAX_VALUE; // already past end at start, to trigger fetch of next releases page
@@ -67,13 +70,9 @@ public class ListUsersSpliterator implements Spliterator<User>
                     activeOffset = 0;
                 }
             }
-            catch (IOException e)
+            catch (Throwable cause)
             {
-                e.printStackTrace(System.err);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
+                LOG.debug("Unable to list users", cause);
             }
         }
 

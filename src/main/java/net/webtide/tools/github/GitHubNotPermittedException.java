@@ -12,26 +12,10 @@
 
 package net.webtide.tools.github;
 
-import java.io.IOException;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-public class SelfTest
+public class GitHubNotPermittedException extends GitHubApiException
 {
-    @Test
-    public void testSelf() throws IOException, InterruptedException
+    public GitHubNotPermittedException(String message)
     {
-        GitHubApi github = GitHubApi.connect();
-        try
-        {
-            User self = github.getSelf();
-            assertNotNull(self);
-        }
-        catch (GitHubNotPermittedException ignore)
-        {
-            // ignore
-        }
+        super(message);
     }
 }
