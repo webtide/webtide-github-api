@@ -133,6 +133,16 @@ public class GitHubApi
             .create();
     }
 
+    public Commit commit(String repoOwner, String repoName, String commitId) throws IOException, InterruptedException
+    {
+        String path = String.format("/repos/%s/%s/commits/%s", repoOwner, repoName, commitId);
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, Commit.class);
+    }
+
     public Cache getCache()
     {
         return cache;
@@ -143,9 +153,158 @@ public class GitHubApi
         this.cache = cache;
     }
 
+    public RateLimits getRateLimits() throws IOException, InterruptedException
+    {
+        URI endpointURI = apiURI.resolve("/rate_limit");
+        HttpRequest request = baseRequest.copy()
+            .GET()
+            .uri(endpointURI)
+            .header("Accept", "application/vnd.github.v3+json")
+            .build();
+        HttpResponse<String> response = client.send(request, responseInfo -> HttpResponse.BodySubscribers.ofString(UTF_8));
+        if (response.statusCode() != 200)
+            throw new GitHubApiException("Unable to get rate limits: status code: " + response.statusCode());
+        return gson.fromJson(response.body(), RateLimits.class);
+    }
+
+    public User getSelf() throws IOException, InterruptedException
+    {
+        String body = getCachedBody("/user", (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, User.class);
+    }
+
+    public String graphql(String query) throws IOException, InterruptedException
+    {
+        Map<String, String> map = new HashMap<>();
+        map.put("query", query);
+
+        String jsonQuery = gson.toJson(map);
+
+        URI endpointURI = apiURI.resolve("/graphql");
+        HttpRequest request = baseRequest.copy()
+            .POST(HttpRequest.BodyPublishers.ofString(jsonQuery))
+            .header("Content-Type", "application/json")
+            .uri(endpointURI)
+            .header("Accept", "application/vnd.github.v3+json")
+            .build();
+        HttpResponse<String> response = client.send(request, responseInfo -> HttpResponse.BodySubscribers.ofString(UTF_8));
+        if (response.statusCode() != 200)
+            throw new GitHubApiException("Unable to post graphql: status code: " + response.statusCode());
+        return response.body();
+    }
+
+    public Issue issue(String repoOwner, String repoName, int issueNum) throws IOException, InterruptedException
+    {
+        String path = String.format("/repos/%s/%s/issues/%d", repoOwner, repoName, issueNum);
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, Issue.class);
+    }
+
+    public IssueEvents issueEvents(String repoOwner, String repoName, int issueNum) throws IOException, InterruptedException
+    {
+        String path = String.format("/repos/%s/%s/issues/%d/events", repoOwner, repoName, issueNum);
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, IssueEvents.class);
+    }
+
+    public Releases listReleases(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
+    {
+        Query query = new Query();
+        query.put("per_page", String.valueOf(resultsPerPage));
+        query.put("page", String.valueOf(pageNum));
+
+        String path = String.format("/repos/%s/%s/releases?%s", repoOwner, repoName, query.toEncodedQuery());
+
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, Releases.class);
+    }
+
+    public Repositories listRepositories(String repoOwner, int resultsPerPage, int pageNum) throws IOException, InterruptedException
+    {
+        Query query = new Query();
+        query.put("per_page", String.valueOf(resultsPerPage));
+        query.put("page", String.valueOf(pageNum));
+
+        String path = String.format("/orgs/%s/repos?%s", repoOwner, query.toEncodedQuery());
+
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, Repositories.class);
+    }
+
+    public Users listRepositoryCollaborators(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
+    {
+        Query query = new Query();
+        query.put("per_page", String.valueOf(resultsPerPage));
+        query.put("page", String.valueOf(pageNum));
+
+        String path = String.format("/repos/%s/%s/collaborators?%s", repoOwner, repoName, query.toEncodedQuery());
+
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, Users.class);
+    }
+
+    public PullRequest pullRequest(String repoOwner, String repoName, int prNum) throws IOException, InterruptedException
+    {
+        String path = String.format("/repos/%s/%s/pulls/%d", repoOwner, repoName, prNum);
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, PullRequest.class);
+    }
+
+    public PullRequestCommits pullRequestCommits(String repoOwner, String repoName, int prNum) throws IOException, InterruptedException
+    {
+        String path = String.format("/repos/%s/%s/pulls/%d/commits", repoOwner, repoName, prNum);
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, PullRequestCommits.class);
+    }
+
     public String raw(String path, Function<HttpRequest.Builder, HttpRequest> requestBuilder) throws IOException, InterruptedException
     {
         return getCachedBody(path, requestBuilder);
+    }
+
+    public Stream<Release> streamReleases(String repoOwner, String repoName)
+    {
+        return streamReleases(repoOwner, repoName, 20);
+    }
+
+    public Stream<Release> streamReleases(String repoOwner, String repoName, int resultsPerPage)
+    {
+        return StreamSupport.stream(new ListReleasesSpliterator(this, repoOwner, repoName, resultsPerPage), false);
+    }
+
+    public Stream<Repository> streamRepositories(String repoOrg, int resultsPerPage)
+    {
+        return StreamSupport.stream(new ListRepositoriesSpliterator(this, repoOrg, resultsPerPage), false);
+    }
+
+    public Stream<User> streamRepositoryCollaborators(String repoOwner, String repoName, int resultsPerPage)
+    {
+        return StreamSupport.stream(new ListUsersSpliterator((pageNum) ->
+            listRepositoryCollaborators(repoOwner, repoName, resultsPerPage, pageNum)), false);
     }
 
     private String getCachedBody(String path, Function<HttpRequest.Builder, HttpRequest> requestBuilder) throws IOException, InterruptedException
@@ -194,165 +353,6 @@ public class GitHubApi
             rateLeft = new RateLeft(rateLimits);
         }
         return rateLeft;
-    }
-
-    public RateLimits getRateLimits() throws IOException, InterruptedException
-    {
-        URI endpointURI = apiURI.resolve("/rate_limit");
-        HttpRequest request = baseRequest.copy()
-            .GET()
-            .uri(endpointURI)
-            .header("Accept", "application/vnd.github.v3+json")
-            .build();
-        HttpResponse<String> response = client.send(request, responseInfo -> HttpResponse.BodySubscribers.ofString(UTF_8));
-        if (response.statusCode() != 200)
-            throw new GitHubApiException("Unable to get rate limits: status code: " + response.statusCode());
-        return gson.fromJson(response.body(), RateLimits.class);
-    }
-
-    public User getSelf() throws IOException, InterruptedException
-    {
-        String body = getCachedBody("/user", (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.v3+json")
-                .build());
-        return gson.fromJson(body, User.class);
-    }
-
-    public String graphql(String query) throws IOException, InterruptedException
-    {
-        Map<String, String> map = new HashMap<>();
-        map.put("query", query);
-
-        String jsonQuery = gson.toJson(map);
-
-        URI endpointURI = apiURI.resolve("/graphql");
-        HttpRequest request = baseRequest.copy()
-            .POST(HttpRequest.BodyPublishers.ofString(jsonQuery))
-            .header("Content-Type", "application/json")
-            .uri(endpointURI)
-            .header("Accept", "application/vnd.github.v3+json")
-            .build();
-        HttpResponse<String> response = client.send(request, responseInfo -> HttpResponse.BodySubscribers.ofString(UTF_8));
-        if (response.statusCode() != 200)
-            throw new GitHubApiException("Unable to post graphql: status code: " + response.statusCode());
-        return response.body();
-    }
-
-    public Commit commit(String repoOwner, String repoName, String commitId) throws IOException, InterruptedException
-    {
-        String path = String.format("/repos/%s/%s/commits/%s", repoOwner, repoName, commitId);
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.v3+json")
-                .build());
-        return gson.fromJson(body, Commit.class);
-    }
-
-    public Issue issue(String repoOwner, String repoName, int issueNum) throws IOException, InterruptedException
-    {
-        String path = String.format("/repos/%s/%s/issues/%d", repoOwner, repoName, issueNum);
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.v3+json")
-                .build());
-        return gson.fromJson(body, Issue.class);
-    }
-
-    public IssueEvents issueEvents(String repoOwner, String repoName, int issueNum) throws IOException, InterruptedException
-    {
-        String path = String.format("/repos/%s/%s/issues/%d/events", repoOwner, repoName, issueNum);
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.v3+json")
-                .build());
-        return gson.fromJson(body, IssueEvents.class);
-    }
-
-    public PullRequest pullRequest(String repoOwner, String repoName, int prNum) throws IOException, InterruptedException
-    {
-        String path = String.format("/repos/%s/%s/pulls/%d", repoOwner, repoName, prNum);
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.v3+json")
-                .build());
-        return gson.fromJson(body, PullRequest.class);
-    }
-
-    public PullRequestCommits pullRequestCommits(String repoOwner, String repoName, int prNum) throws IOException, InterruptedException
-    {
-        String path = String.format("/repos/%s/%s/pulls/%d/commits", repoOwner, repoName, prNum);
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.v3+json")
-                .build());
-        return gson.fromJson(body, PullRequestCommits.class);
-    }
-
-    public Releases listReleases(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
-    {
-        Query query = new Query();
-        query.put("per_page", String.valueOf(resultsPerPage));
-        query.put("page", String.valueOf(pageNum));
-
-        String path = String.format("/repos/%s/%s/releases?%s", repoOwner, repoName, query.toEncodedQuery());
-
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.v3+json")
-                .build());
-        return gson.fromJson(body, Releases.class);
-    }
-
-    public Stream<Release> streamReleases(String repoOwner, String repoName)
-    {
-        return streamReleases(repoOwner, repoName, 20);
-    }
-
-    public Stream<Release> streamReleases(String repoOwner, String repoName, int resultsPerPage)
-    {
-        return StreamSupport.stream(new ListReleasesSpliterator(this, repoOwner, repoName, resultsPerPage), false);
-    }
-
-    public Repositories listRepositories(String repoOwner, int resultsPerPage, int pageNum) throws IOException, InterruptedException
-    {
-        Query query = new Query();
-        query.put("per_page", String.valueOf(resultsPerPage));
-        query.put("page", String.valueOf(pageNum));
-
-        String path = String.format("/orgs/%s/repos?%s", repoOwner, query.toEncodedQuery());
-
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.v3+json")
-                .build());
-        return gson.fromJson(body, Repositories.class);
-    }
-
-    public Stream<Repository> streamRepositories(String repoOrg, int resultsPerPage)
-    {
-        return StreamSupport.stream(new ListRepositoriesSpliterator(this, repoOrg, resultsPerPage), false);
-    }
-
-    public Users listRepositoryCollaborators(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
-    {
-        Query query = new Query();
-        query.put("per_page", String.valueOf(resultsPerPage));
-        query.put("page", String.valueOf(pageNum));
-
-        String path = String.format("/repos/%s/%s/collaborators?%s", repoOwner, repoName, query.toEncodedQuery());
-
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.v3+json")
-                .build());
-        return gson.fromJson(body, Users.class);
-    }
-
-    public Stream<User> streamRepositoryCollaborators(String repoOwner, String repoName, int resultsPerPage)
-    {
-        return StreamSupport.stream(new ListUsersSpliterator((pageNum) ->
-            listRepositoryCollaborators(repoOwner, repoName, resultsPerPage, pageNum)), false);
     }
 
     static class Query extends HashMap<String, String>
