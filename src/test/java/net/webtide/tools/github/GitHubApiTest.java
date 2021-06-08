@@ -30,4 +30,10 @@ public class GitHubApiTest
         );
         // System.out.println(body);
     }
+
+    @Test
+    public void testShowEnv()
+    {
+        System.getenv().forEach((key, value) -> System.out.printf("[%s] -> [%s]%n", key, value));
+    }
 }
