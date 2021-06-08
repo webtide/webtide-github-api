@@ -26,6 +26,9 @@ public class Repository
     protected String description;
     protected boolean fork;
     protected String url;
+    protected String gitUrl;
+    protected String sshUrl;
+    protected String cloneUrl;
     protected ZonedDateTime createdAt;
     protected ZonedDateTime updatedAt;
     protected ZonedDateTime pushedAt;
@@ -138,5 +141,20 @@ public class Repository
     public String getDefaultBranch()
     {
         return defaultBranch;
+    }
+
+    public String getGitUrl()
+    {
+        return gitUrl;
+    }
+
+    public String getSshUrl()
+    {
+        return sshUrl;
+    }
+
+    public String getCloneUrl()
+    {
+        return cloneUrl;
     }
 }
