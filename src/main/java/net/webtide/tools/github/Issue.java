@@ -96,4 +96,13 @@ public class Issue
     {
         return pullRequest;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Issue{" + "number=" + number + ", title='" + title + '\'' + ", state='" + state + '\'' + ", labels="
+            + labels + ", user=" + user + ", closedBy=" + closedBy + ", assignees=" + assignees + ", body='" + body
+            + '\'' + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", closedAt=" + closedAt
+            + ", authorAssociation='" + authorAssociation + '\'' + ", pullRequest=" + pullRequest + '}';
+    }
 }

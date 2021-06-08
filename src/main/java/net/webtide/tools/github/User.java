@@ -83,4 +83,13 @@ public class User
     {
         return permissions;
     }
+
+    @Override
+    public String toString()
+    {
+        return "User{" + "login='" + login + '\'' + ", type='" + type + '\'' + ", name='" + name + '\'' + ", company='"
+            + company + '\'' + ", location='" + location + '\'' + ", email='" + email + '\'' + ", bio='" + bio + '\''
+            + ", siteAdmin=" + siteAdmin + ", permissions=" + permissions + ", createdAt=" + createdAt + ", updatedAt="
+            + updatedAt + '}';
+    }
 }

@@ -16,22 +16,12 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PullRequest
+public class PullRequest extends Issue
 {
-    protected int number;
-    protected String state;
     protected boolean locked;
-    protected String title;
-    protected String body;
-    protected User user;
-    protected ZonedDateTime createdAt;
-    protected ZonedDateTime updatedAt;
-    protected ZonedDateTime closedAt;
     protected ZonedDateTime mergedAt;
     protected String mergeCommitSha;
-    protected List<User> assignees = new ArrayList<>();
     protected List<User> requestedReviewers = new ArrayList<>();
-    protected List<Label> labels = new ArrayList<>();
     protected BaseHeadRef head;
     protected BaseHeadRef base;
     protected boolean merged;
@@ -48,29 +38,14 @@ public class PullRequest
         return additions;
     }
 
-    public List<User> getAssignees()
-    {
-        return assignees;
-    }
-
     public BaseHeadRef getBase()
     {
         return base;
     }
 
-    public String getBody()
-    {
-        return body;
-    }
-
     public int getChanged_files()
     {
         return changed_files;
-    }
-
-    public ZonedDateTime getClosedAt()
-    {
-        return closedAt;
     }
 
     public int getComments()
@@ -81,11 +56,6 @@ public class PullRequest
     public int getCommits()
     {
         return commits;
-    }
-
-    public ZonedDateTime getCreatedAt()
-    {
-        return createdAt;
     }
 
     public int getDeletions()
@@ -118,11 +88,6 @@ public class PullRequest
         return mergedBy;
     }
 
-    public int getNumber()
-    {
-        return number;
-    }
-
     public List<User> getRequestedReviewers()
     {
         return requestedReviewers;
@@ -131,26 +96,6 @@ public class PullRequest
     public int getReviewComments()
     {
         return reviewComments;
-    }
-
-    public String getState()
-    {
-        return state;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public ZonedDateTime getUpdatedAt()
-    {
-        return updatedAt;
-    }
-
-    public User getUser()
-    {
-        return user;
     }
 
     public boolean isLocked()
