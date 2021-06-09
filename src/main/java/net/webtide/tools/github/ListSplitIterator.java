@@ -12,8 +12,6 @@
 
 package net.webtide.tools.github;
 
-import net.webtide.tools.github.GitHubApi;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
