@@ -42,11 +42,6 @@ public class Column
         return id;
     }
 
-    public Cards getCards() throws IOException, InterruptedException
-    {
-        return GitHubApi.connect().listCards(this);
-    }
-
     @Override
     public String toString()
     {

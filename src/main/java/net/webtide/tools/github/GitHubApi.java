@@ -38,6 +38,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.webtide.tools.github.cache.MemoryCache;
 import net.webtide.tools.github.gson.ISO8601TypeAdapter;
+import net.webtide.tools.github.iters.ListCardsSpliterator;
+import net.webtide.tools.github.iters.ListColumnsSpliterator;
+import net.webtide.tools.github.iters.ListProjectsSpliterator;
 import net.webtide.tools.github.iters.ListReleasesSpliterator;
 import net.webtide.tools.github.iters.ListRepositoriesSpliterator;
 import net.webtide.tools.github.iters.ListUsersSpliterator;
@@ -306,10 +309,12 @@ public class GitHubApi
         return gson.fromJson(body, Projects.class);
     }
 
-    public Columns listColumns(Project project) throws IOException, InterruptedException
+    public Columns listColumns(Project project, int resultsPerPage, int pageNum) throws IOException, InterruptedException
     {
-
-        String path = String.format("/projects/%s/columns", project.getId());
+        Query query = new Query();
+        if (resultsPerPage > 0) query.put("per_page", String.valueOf(resultsPerPage));
+        if (pageNum > 0) query.put("page", String.valueOf(pageNum));
+        String path = String.format("/projects/%s/columns?%s", project.getId(), query.toEncodedQuery());
 
         String body = getCachedBody(path, (requestBuilder) ->
             requestBuilder.GET()
@@ -318,9 +323,12 @@ public class GitHubApi
         return gson.fromJson(body, Columns.class);
     }
 
-    public Cards listCards(Column column) throws IOException, InterruptedException
+    public Cards listCards(Column column, int resultsPerPage, int pageNum) throws IOException, InterruptedException
     {
-        String path = String.format("https://api.github.com/projects/columns/%s/cards", column.getId());
+        Query query = new Query();
+        if (resultsPerPage > 0) query.put("per_page", String.valueOf(resultsPerPage));
+        if (pageNum > 0) query.put("page", String.valueOf(pageNum));
+        String path = String.format("https://api.github.com/projects/columns/%s/cards?%s", column.getId(), query.toEncodedQuery());
 
         String body = getCachedBody(path, (requestBuilder) ->
             requestBuilder.GET()
@@ -385,6 +393,20 @@ public class GitHubApi
             listRepositoryCollaborators(repoOwner, repoName, resultsPerPage, pageNum)), false);
     }
 
+    public Stream<Project> streamProjects(String repoOwner, String repoName, int resultsPerPage)
+    {
+        return StreamSupport.stream(new ListProjectsSpliterator(this, repoOwner, repoName, resultsPerPage), false);
+    }
+
+    public Stream<Column> streamColumns(Project project, int resultsPerPage)
+    {
+        return StreamSupport.stream(new ListColumnsSpliterator(this, project, resultsPerPage), false);
+    }
+
+    public Stream<Card> streamCards(Column column, int resultsPerPage)
+    {
+        return StreamSupport.stream( new ListCardsSpliterator( this, column, resultsPerPage), false);
+    }
 
     public Releases listReleases(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
     {

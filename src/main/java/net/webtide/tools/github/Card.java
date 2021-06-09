@@ -14,7 +14,6 @@ package net.webtide.tools.github;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.function.Function;
 
 public class Card
 {
@@ -38,6 +37,11 @@ public class Card
     public ZonedDateTime getUpdatedAt()
     {
         return updatedAt;
+    }
+
+    protected String getContent_url()
+    {
+        return content_url;
     }
 
     public Issue getIssue()

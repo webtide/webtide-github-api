@@ -67,10 +67,6 @@ public class Project
         return id;
     }
 
-    public Columns getColumns() throws IOException, InterruptedException
-    {
-        return GitHubApi.connect().listColumns(this);
-    }
 
     @Override
     public String toString()
