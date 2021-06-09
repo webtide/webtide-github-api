@@ -294,6 +294,13 @@ public class GitHubApi
         return gson.fromJson(body, PullRequestCommits.class);
     }
 
+    public Issue getIssueFromCard(Card card)  throws IOException, InterruptedException
+    {
+        return GitHubApi.connect().query(card.getContentUrl(), Issue.class, builder -> builder.GET()
+            .header("Accept", "application/vnd.github.v3+json")
+            .build());
+    }
+
     public Projects listProjects(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
     {
         Query query = new Query();

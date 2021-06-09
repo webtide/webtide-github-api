@@ -39,22 +39,9 @@ public class Card
         return updatedAt;
     }
 
-    protected String getContent_url()
+    protected String getContentUrl()
     {
         return content_url;
     }
 
-    public Issue getIssue()
-    {
-        try
-        {
-            return GitHubApi.connect().query(content_url, Issue.class, builder -> builder.GET()
-                .header("Accept", "application/vnd.github.v3+json")
-                .build());
-        }
-        catch (IOException | InterruptedException e)
-        {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-    }
 }

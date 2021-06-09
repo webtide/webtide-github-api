@@ -67,12 +67,44 @@ public class Project
         return id;
     }
 
-
-    @Override
-    public String toString()
+    public void setId(long id )
     {
-        return "Project{" + "id=" + id + ", number=" + number + ", name='" + name + '\'' + ", body='" + body + '\''
-            + ", state='" + state + '\'' + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", creator="
-            + creator + '}';
+        this.id = id;
     }
+
+    public void setNumber(int number)
+    {
+        this.number = number;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setBody(String body)
+    {
+        this.body = body;
+    }
+
+    public void setState(String state)
+    {
+        this.state = state;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt)
+    {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt)
+    {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setCreator(User creator)
+    {
+        this.creator = creator;
+    }
+
 }
