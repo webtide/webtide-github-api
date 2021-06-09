@@ -10,11 +10,8 @@
 // ========================================================================
 //
 
-package net.webtide.tools.github.iters;
+package net.webtide.tools.github;
 
-import net.webtide.tools.github.Card;
-import net.webtide.tools.github.Cards;
-import net.webtide.tools.github.Column;
 import net.webtide.tools.github.GitHubApi;
 
 import java.io.IOException;
@@ -23,48 +20,52 @@ import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class ListCardsSpliterator implements Spliterator<Card>
+public class ListSplitIterator<T> implements Spliterator<T>
 {
+
     private final GitHubApi github;
-    private final Column column;
-    private final List<Card> activeCards = new ArrayList<>();
+    private final List<T> activeData = new ArrayList<>();
     private int activeOffset = Integer.MAX_VALUE; // already past end at start, to trigger fetch of next releases page
     private int activePage = 1;
-    private final int perPage;
+    private DataSupplier<T> supplier;
 
-    public ListCardsSpliterator(GitHubApi gitHubApi, Column column, int perPage)
+    public ListSplitIterator (GitHubApi gitHubApi, DataSupplier<T> supplier)
     {
         this.github = gitHubApi;
-        this.column = column;
-        this.perPage = perPage;
+        this.supplier = supplier;
+    }
+
+    @FunctionalInterface
+    public interface DataSupplier<T> {
+        List<T> get(int activePage) throws IOException, InterruptedException;
     }
 
     @Override
-    public boolean tryAdvance(Consumer<? super Card> action)
+    public boolean tryAdvance(Consumer<? super T> action)
     {
-        Card card = getNextCard();
-        if (card == null)
+        T data = getNextData();
+        if (data == null)
             return false;
         else
         {
-            action.accept(card);
+            action.accept(data);
             return true;
         }
     }
 
-    private Card getNextCard()
+    private T getNextData()
     {
-        if (activeOffset >= activeCards.size())
+        if (activeOffset >= activeData.size())
         {
             try
             {
-                activeCards.clear();
-                while (activeCards.isEmpty())
+                activeData.clear();
+                while (activeData.isEmpty())
                 {
-                    Cards cards = github.listCards( column, perPage, activePage++);
+                    List<T> cards =  supplier.get(activePage++);
                     if ((cards == null) || cards.isEmpty())
                         return null;
-                    activeCards.addAll(cards);
+                    activeData.addAll(cards);
                     activeOffset = 0;
                 }
             }
@@ -78,16 +79,16 @@ public class ListCardsSpliterator implements Spliterator<Card>
             }
         }
 
-        if (activeCards.isEmpty())
+        if (activeData.isEmpty())
         {
             return null;
         }
 
-        return activeCards.get(activeOffset++);
+        return activeData.get(activeOffset++);
     }
 
     @Override
-    public Spliterator<Card> trySplit()
+    public Spliterator<T> trySplit()
     {
         return null;
     }
@@ -103,4 +104,5 @@ public class ListCardsSpliterator implements Spliterator<Card>
     {
         return ORDERED;
     }
+
 }
