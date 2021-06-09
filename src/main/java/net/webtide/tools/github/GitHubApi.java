@@ -43,6 +43,7 @@ import net.webtide.tools.github.iters.ListColumnsSpliterator;
 import net.webtide.tools.github.iters.ListProjectsSpliterator;
 import net.webtide.tools.github.iters.ListReleasesSpliterator;
 import net.webtide.tools.github.iters.ListRepositoriesSpliterator;
+import net.webtide.tools.github.iters.ListSplitIterator;
 import net.webtide.tools.github.iters.ListUsersSpliterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -402,7 +403,9 @@ public class GitHubApi
 
     public Stream<Project> streamProjects(String repoOwner, String repoName, int resultsPerPage)
     {
-        return StreamSupport.stream(new ListProjectsSpliterator(this, repoOwner, repoName, resultsPerPage), false);
+        return StreamSupport.stream(new ListSplitIterator<>(this, resultsPerPage,
+                                              (perPage, activePage) -> GitHubApi.this.listProjects(repoOwner, repoName, perPage, activePage)), false);
+
     }
 
     public Stream<Column> streamColumns(Project project, int resultsPerPage)
@@ -412,7 +415,7 @@ public class GitHubApi
 
     public Stream<Card> streamCards(Column column, int resultsPerPage)
     {
-        return StreamSupport.stream( new ListCardsSpliterator( this, column, resultsPerPage), false);
+        return StreamSupport.stream(new ListCardsSpliterator(this, column, resultsPerPage), false);
     }
 
     public Releases listReleases(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
