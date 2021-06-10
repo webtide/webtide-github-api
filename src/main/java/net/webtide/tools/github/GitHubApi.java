@@ -381,42 +381,42 @@ public class GitHubApi
     public Stream<Release> streamReleases(String repoOwner, String repoName, int resultsPerPage)
     {
         ListSplitIterator.DataSupplier dataSupplier =
-            activePage -> GitHubApi.this.listReleases(repoOwner, repoName, resultsPerPage, activePage);
+            activePage -> listReleases(repoOwner, repoName, resultsPerPage, activePage);
         return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Stream<Repository> streamRepositories(String repoOrg, int resultsPerPage)
     {
         ListSplitIterator.DataSupplier dataSupplier =
-            activePage -> GitHubApi.this.listRepositories(repoOrg, resultsPerPage, activePage);
+            activePage -> listRepositories(repoOrg, resultsPerPage, activePage);
         return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Stream<User> streamRepositoryCollaborators(String repoOwner, String repoName, int resultsPerPage)
     {
         ListSplitIterator.DataSupplier dataSupplier =
-            activePage -> GitHubApi.this.listRepositoryCollaborators(repoOwner, repoName, resultsPerPage, activePage);
+            activePage -> listRepositoryCollaborators(repoOwner, repoName, resultsPerPage, activePage);
         return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Stream<Project> streamProjects(String repoOwner, String repoName, int resultsPerPage)
     {
         ListSplitIterator.DataSupplier dataSupplier =
-            activePage -> GitHubApi.this.listProjects(repoOwner, repoName, resultsPerPage, activePage);
+            activePage -> listProjects(repoOwner, repoName, resultsPerPage, activePage);
         return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Stream<Column> streamColumns(Project project, int resultsPerPage)
     {
         ListSplitIterator.DataSupplier dataSupplier =
-            activePage -> GitHubApi.this.listColumns(project, resultsPerPage, activePage);
+            activePage -> listColumns(project, resultsPerPage, activePage);
         return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Stream<Card> streamCards(Column column, int resultsPerPage)
     {
         ListSplitIterator.DataSupplier dataSupplier =
-            activePage -> GitHubApi.this.listCards(column, resultsPerPage, activePage);
+            activePage -> listCards(column, resultsPerPage, activePage);
         return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
