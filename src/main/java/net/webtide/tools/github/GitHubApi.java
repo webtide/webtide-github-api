@@ -12,15 +12,6 @@
 
 package net.webtide.tools.github;
 
-import com.google.common.base.Strings;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import net.webtide.tools.github.cache.MemoryCache;
-import net.webtide.tools.github.gson.ISO8601TypeAdapter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URI;
@@ -41,6 +32,15 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import com.google.common.base.Strings;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import net.webtide.tools.github.cache.MemoryCache;
+import net.webtide.tools.github.gson.ISO8601TypeAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class GitHubApi
@@ -51,6 +51,9 @@ public class GitHubApi
     private final HttpRequest.Builder baseRequest;
     private final Gson gson;
     private Cache cache;
+    private final GitHubProjectsApi gitHubProjectsApi;
+    private final GitHubColumnsApi gitHubColumnsApi;
+    private final GitHubCardsApi gitHubCardsApi;
 
     private RateLeft rateLeft;
 
@@ -66,6 +69,9 @@ public class GitHubApi
             .header("Authorization", "Bearer " + oauthToken);
         this.gson = newGson();
         this.cache = new MemoryCache();
+        gitHubProjectsApi = new GitHubProjectsApi( this);
+        gitHubColumnsApi = new GitHubColumnsApi(this);
+        gitHubCardsApi = new GitHubCardsApi(this);
     }
 
     public static GitHubApi connect()
@@ -130,6 +136,11 @@ public class GitHubApi
             .create();
     }
 
+    protected Gson getGson()
+    {
+        return this.gson;
+    }
+
     public Commit commit(String repoOwner, String repoName, String commitId) throws IOException, InterruptedException
     {
         String path = String.format("/repos/%s/%s/commits/%s", repoOwner, repoName, commitId);
@@ -157,7 +168,7 @@ public class GitHubApi
         return gson.fromJson(body, t);
     }
 
-    private String getCachedBody(String path, Function<HttpRequest.Builder, HttpRequest> requestBuilder) throws IOException, InterruptedException
+    protected String getCachedBody(String path, Function<HttpRequest.Builder, HttpRequest> requestBuilder) throws IOException, InterruptedException
     {
         try
         {
@@ -295,49 +306,6 @@ public class GitHubApi
             .build());
     }
 
-    public Projects listProjects(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
-    {
-        Query query = new Query();
-        if (resultsPerPage > 0) query.put("per_page", String.valueOf(resultsPerPage));
-        if (pageNum > 0) query.put("page", String.valueOf(pageNum));
-
-        String path = String.format("/repos/%s/%s/projects?%s", repoOwner, repoName, query.toEncodedQuery());
-
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.inertia-preview+json")
-                .build());
-        return gson.fromJson(body, Projects.class);
-    }
-
-    public Columns listColumns(Project project, int resultsPerPage, int pageNum) throws IOException, InterruptedException
-    {
-        Query query = new Query();
-        if (resultsPerPage > 0) query.put("per_page", String.valueOf(resultsPerPage));
-        if (pageNum > 0) query.put("page", String.valueOf(pageNum));
-        String path = String.format("/projects/%s/columns?%s", project.getId(), query.toEncodedQuery());
-
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.inertia-preview+json")
-                .build());
-        return gson.fromJson(body, Columns.class);
-    }
-
-    public Cards listCards(Column column, int resultsPerPage, int pageNum) throws IOException, InterruptedException
-    {
-        Query query = new Query();
-        if (resultsPerPage > 0) query.put("per_page", String.valueOf(resultsPerPage));
-        if (pageNum > 0) query.put("page", String.valueOf(pageNum));
-        String path = String.format("https://api.github.com/projects/columns/%s/cards?%s", column.getId(), query.toEncodedQuery());
-
-        String body = getCachedBody(path, (requestBuilder) ->
-            requestBuilder.GET()
-                .header("Accept", "application/vnd.github.inertia-preview+json")
-                .build());
-        return gson.fromJson(body, Cards.class);
-    }
-
     public Repositories listRepositories(String repoOwner, int resultsPerPage, int pageNum) throws IOException, InterruptedException
     {
         Query query = new Query();
@@ -399,26 +367,6 @@ public class GitHubApi
         return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
-    public Stream<Project> streamProjects(String repoOwner, String repoName, int resultsPerPage)
-    {
-        ListSplitIterator.DataSupplier dataSupplier =
-            activePage -> listProjects(repoOwner, repoName, resultsPerPage, activePage);
-        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
-    }
-
-    public Stream<Column> streamColumns(Project project, int resultsPerPage)
-    {
-        ListSplitIterator.DataSupplier dataSupplier =
-            activePage -> listColumns(project, resultsPerPage, activePage);
-        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
-    }
-
-    public Stream<Card> streamCards(Column column, int resultsPerPage)
-    {
-        ListSplitIterator.DataSupplier dataSupplier =
-            activePage -> listCards(column, resultsPerPage, activePage);
-        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
-    }
 
     public Releases listReleases(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
     {
@@ -433,6 +381,21 @@ public class GitHubApi
                 .header("Accept", "application/vnd.github.v3+json")
                 .build());
         return gson.fromJson(body, Releases.class);
+    }
+
+    public GitHubProjectsApi getGitHubProjectApi()
+    {
+        return this.gitHubProjectsApi;
+    }
+
+    public GitHubColumnsApi getGitHubColumnsApi()
+    {
+        return this.gitHubColumnsApi;
+    }
+
+    public GitHubCardsApi getGitHubCardsApi()
+    {
+        return this.gitHubCardsApi;
     }
 
     static class Query extends HashMap<String, String>

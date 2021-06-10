@@ -12,16 +12,16 @@
 
 package net.webtide.tools.github;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.stream.Stream;
+
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.stream.Stream;
 
 public class ProjectsTest
 {
@@ -30,6 +30,7 @@ public class ProjectsTest
 
     private static String REPO_OWNER;
     private static String REPO_NAME;
+
     @BeforeAll
     public static void setup() throws Exception
     {
@@ -51,7 +52,7 @@ public class ProjectsTest
                 .findGitDir()
                 .setMustExist(true)
                 .build();
-            String gitUrl = repository.getConfig().getString( "remote", "origin", "url" );
+            String gitUrl = repository.getConfig().getString("remote", "origin", "url" );
             // format is https://github.com/eclipse/jetty-project
             if (gitUrl != null && !gitUrl.isEmpty())
             {
@@ -76,27 +77,27 @@ public class ProjectsTest
     public void testProjects() throws IOException, InterruptedException
     {
         GitHubApi github = GitHubApi.connect();
-        Projects projects = github.listProjects(REPO_OWNER, REPO_NAME, 0, 0);
+        Projects projects = github.getGitHubProjectApi().listProjects(REPO_OWNER, REPO_NAME, 0, 0);
 
-        Stream<Project> streamProjects = github.streamProjects("eclipse", "jetty.project", 0);
+        Stream<Project> streamProjects = github.getGitHubProjectApi().streamProjects("eclipse", "jetty.project", 0);
         LOG.info("projects list size {}, stream size: {}",projects.size(), streamProjects.count());
 
         LOG.info("projects: {}", projects);
 
         Project project = projects.stream().filter(p -> p.getName().contains("1.0.0-test")).findFirst().get();
 
-        Columns columns = github.listColumns(project, 0, 0);
+        Columns columns = github.getGitHubColumnsApi().listColumns(project, 0, 0);
         LOG.info("columns: {}", columns);
 
-        columns = github.listColumns(project, 0, 0);
+        columns = github.getGitHubColumnsApi().listColumns(project, 0, 0);
         LOG.info("columns: {}", columns);
-        Stream<Column> streamColumns = github.streamColumns(project, 0);
+        Stream<Column> streamColumns = github.getGitHubColumnsApi().streamColumns(project, 0);
         LOG.info("columns list size {}, stream size: {}",columns.size(), streamColumns.count());
 
         Column column = columns.get(0);
 
-        Cards cards = github.listCards(column, 0, 0);
-        Stream<Card> streamCards = github.streamCards(column, 0);
+        Cards cards = github.getGitHubCardsApi().listCards(column, 0, 0);
+        Stream<Card> streamCards = github.getGitHubCardsApi().streamCards(column, 0);
         LOG.info("cards list size {}, stream size: {}",cards.size(), streamCards.count());
         LOG.info("cards: {}", cards);
         cards.forEach(card ->

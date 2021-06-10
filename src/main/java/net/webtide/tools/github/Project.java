@@ -12,12 +12,10 @@
 
 package net.webtide.tools.github;
 
-import java.io.IOException;
 import java.time.ZonedDateTime;
 
 public class Project
 {
-
     protected long id;
     protected int number;
     protected String name;
@@ -67,7 +65,7 @@ public class Project
         return id;
     }
 
-    public void setId(long id )
+    public void setId(long id)
     {
         this.id = id;
     }
