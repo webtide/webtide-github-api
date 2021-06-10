@@ -12,6 +12,15 @@
 
 package net.webtide.tools.github;
 
+import com.google.common.base.Strings;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import net.webtide.tools.github.cache.MemoryCache;
+import net.webtide.tools.github.gson.ISO8601TypeAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URI;
@@ -31,21 +40,6 @@ import java.util.Properties;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
-import com.google.common.base.Strings;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import net.webtide.tools.github.cache.MemoryCache;
-import net.webtide.tools.github.gson.ISO8601TypeAdapter;
-import net.webtide.tools.github.iters.ListCardsSpliterator;
-import net.webtide.tools.github.iters.ListColumnsSpliterator;
-import net.webtide.tools.github.iters.ListProjectsSpliterator;
-import net.webtide.tools.github.iters.ListReleasesSpliterator;
-import net.webtide.tools.github.iters.ListRepositoriesSpliterator;
-import net.webtide.tools.github.iters.ListUsersSpliterator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -386,33 +380,44 @@ public class GitHubApi
 
     public Stream<Release> streamReleases(String repoOwner, String repoName, int resultsPerPage)
     {
-        return StreamSupport.stream(new ListReleasesSpliterator(this, repoOwner, repoName, resultsPerPage), false);
+        ListSplitIterator.DataSupplier dataSupplier =
+            activePage -> listReleases(repoOwner, repoName, resultsPerPage, activePage);
+        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Stream<Repository> streamRepositories(String repoOrg, int resultsPerPage)
     {
-        return StreamSupport.stream(new ListRepositoriesSpliterator(this, repoOrg, resultsPerPage), false);
+        ListSplitIterator.DataSupplier dataSupplier =
+            activePage -> listRepositories(repoOrg, resultsPerPage, activePage);
+        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Stream<User> streamRepositoryCollaborators(String repoOwner, String repoName, int resultsPerPage)
     {
-        return StreamSupport.stream(new ListUsersSpliterator((pageNum) ->
-            listRepositoryCollaborators(repoOwner, repoName, resultsPerPage, pageNum)), false);
+        ListSplitIterator.DataSupplier dataSupplier =
+            activePage -> listRepositoryCollaborators(repoOwner, repoName, resultsPerPage, activePage);
+        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Stream<Project> streamProjects(String repoOwner, String repoName, int resultsPerPage)
     {
-        return StreamSupport.stream(new ListProjectsSpliterator(this, repoOwner, repoName, resultsPerPage), false);
+        ListSplitIterator.DataSupplier dataSupplier =
+            activePage -> listProjects(repoOwner, repoName, resultsPerPage, activePage);
+        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Stream<Column> streamColumns(Project project, int resultsPerPage)
     {
-        return StreamSupport.stream(new ListColumnsSpliterator(this, project, resultsPerPage), false);
+        ListSplitIterator.DataSupplier dataSupplier =
+            activePage -> listColumns(project, resultsPerPage, activePage);
+        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Stream<Card> streamCards(Column column, int resultsPerPage)
     {
-        return StreamSupport.stream( new ListCardsSpliterator( this, column, resultsPerPage), false);
+        ListSplitIterator.DataSupplier dataSupplier =
+            activePage -> listCards(column, resultsPerPage, activePage);
+        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
     }
 
     public Releases listReleases(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
