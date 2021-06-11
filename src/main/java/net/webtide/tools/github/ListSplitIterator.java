@@ -34,7 +34,8 @@ public class ListSplitIterator<T> implements Spliterator<T>
     }
 
     @FunctionalInterface
-    public interface DataSupplier<T> {
+    public interface DataSupplier<T>
+    {
         List<T> get(int activePage) throws IOException, InterruptedException;
     }
 
@@ -60,10 +61,10 @@ public class ListSplitIterator<T> implements Spliterator<T>
                 activeData.clear();
                 while (activeData.isEmpty())
                 {
-                    List<T> cards =  supplier.get(activePage++);
-                    if ((cards == null) || cards.isEmpty())
+                    List<T> datas =  supplier.get(activePage++);
+                    if ((datas == null) || datas.isEmpty())
                         return null;
-                    activeData.addAll(cards);
+                    activeData.addAll(datas);
                     activeOffset = 0;
                 }
             }

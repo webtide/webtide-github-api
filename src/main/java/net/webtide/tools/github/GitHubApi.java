@@ -289,6 +289,24 @@ public class GitHubApi
         return gson.fromJson(body, PullRequest.class);
     }
 
+    public PullRequests listPullRequests(String repoOwner, String repoName, IssueState issueState, int resultsPerPage, int pageNum) throws IOException, InterruptedException
+    {
+        Query query = new Query();
+        query.put("per_page", String.valueOf(resultsPerPage));
+        query.put("page", String.valueOf(pageNum));
+        if (issueState != null)
+        {
+            query.put("state", issueState.toString());
+        }
+        String path = String.format("/repos/%s/%s/pulls?%s", repoOwner, repoName, query.toEncodedQuery());
+
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, PullRequests.class);
+    }
+
     public PullRequestCommits pullRequestCommits(String repoOwner, String repoName, int prNum) throws IOException, InterruptedException
     {
         String path = String.format("/repos/%s/%s/pulls/%d/commits", repoOwner, repoName, prNum);
@@ -346,25 +364,32 @@ public class GitHubApi
         return streamReleases(repoOwner, repoName, 20);
     }
 
+    public Stream<PullRequest> streamPullRequests(String repoOwner, String repoName, IssueState issueState, int resultsPerPage)
+    {
+        ListSplitIterator.DataSupplier dataSupplier =
+            activePage -> listPullRequests(repoOwner, repoName, issueState, resultsPerPage, activePage);
+        return StreamSupport.stream(new ListSplitIterator<PullRequest>(this, dataSupplier), false);
+    }
+
     public Stream<Release> streamReleases(String repoOwner, String repoName, int resultsPerPage)
     {
         ListSplitIterator.DataSupplier dataSupplier =
             activePage -> listReleases(repoOwner, repoName, resultsPerPage, activePage);
-        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
+        return StreamSupport.stream(new ListSplitIterator<Release>(this, dataSupplier), false);
     }
 
     public Stream<Repository> streamRepositories(String repoOrg, int resultsPerPage)
     {
         ListSplitIterator.DataSupplier dataSupplier =
             activePage -> listRepositories(repoOrg, resultsPerPage, activePage);
-        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
+        return StreamSupport.stream(new ListSplitIterator<Repository>(this, dataSupplier), false);
     }
 
     public Stream<User> streamRepositoryCollaborators(String repoOwner, String repoName, int resultsPerPage)
     {
         ListSplitIterator.DataSupplier dataSupplier =
             activePage -> listRepositoryCollaborators(repoOwner, repoName, resultsPerPage, activePage);
-        return StreamSupport.stream(new ListSplitIterator<>(this, dataSupplier), false);
+        return StreamSupport.stream(new ListSplitIterator<User>(this, dataSupplier), false);
     }
 
 

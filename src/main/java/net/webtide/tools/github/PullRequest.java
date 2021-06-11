@@ -32,6 +32,7 @@ public class PullRequest extends Issue
     protected int additions;
     protected int deletions;
     protected int changed_files;
+    protected boolean draft;
 
     public int getAdditions()
     {
@@ -106,5 +107,10 @@ public class PullRequest extends Issue
     public boolean isMerged()
     {
         return merged;
+    }
+
+    public boolean isDraft()
+    {
+        return draft;
     }
 }
