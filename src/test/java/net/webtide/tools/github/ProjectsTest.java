@@ -100,17 +100,10 @@ public class ProjectsTest
         Stream<Card> streamCards = github.getGitHubCardsApi().streamCards(column, 0);
         LOG.info("cards list size {}, stream size: {}",cards.size(), streamCards.count());
         LOG.info("cards: {}", cards);
-        cards.forEach(card ->
-                      {
-                try
-                {
-                    LOG.info("card: {}, issue: {}", card, github.getIssueFromCard(card));
-                }
-                catch (Exception e)
-                {
-                e.printStackTrace();
-                }
-            });
+        for (Card card : cards)
+        {
+            LOG.info("card: {}, issue: {}", card, github.getIssueFromCard(card));
+        }
     }
 
 }
