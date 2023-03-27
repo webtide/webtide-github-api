@@ -1,0 +1,193 @@
+{
+  "data": {
+    "search": {
+      "issueCount": 45,
+      "discussionCount": 0,
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "Y3Vyc29yOjEw"
+      },
+      "edges": [
+        {
+          "node": {
+            "number": 103,
+            "title": "Bump maven-surefire-plugin from 3.0.0-M6 to 3.0.0-M7",
+            "url": "https://github.com/jetty-project/embedded-jetty-live-war/pull/103",
+            "state": "MERGED",
+            "createdAt": "2022-06-07T20:16:17Z",
+            "mergedAt": "2022-06-07T20:17:09Z",
+            "closedAt": "2022-06-07T20:17:09Z",
+            "mergedBy": {
+              "login": "joakime"
+            },
+            "comments": {
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "number": 102,
+            "title": "Bump maven-surefire-plugin from 3.0.0-M6 to 3.0.0-M7",
+            "url": "https://github.com/jetty-project/embedded-jetty-live-war/pull/102",
+            "state": "MERGED",
+            "createdAt": "2022-06-07T20:16:16Z",
+            "mergedAt": "2022-06-07T20:17:13Z",
+            "closedAt": "2022-06-07T20:17:13Z",
+            "mergedBy": {
+              "login": "joakime"
+            },
+            "comments": {
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "number": 101,
+            "title": "Bump maven-surefire-plugin from 3.0.0-M6 to 3.0.0-M7",
+            "url": "https://github.com/jetty-project/embedded-jetty-live-war/pull/101",
+            "state": "MERGED",
+            "createdAt": "2022-06-07T20:16:15Z",
+            "mergedAt": "2022-06-07T20:17:06Z",
+            "closedAt": "2022-06-07T20:17:06Z",
+            "mergedBy": {
+              "login": "joakime"
+            },
+            "comments": {
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "number": 100,
+            "title": "Bump jakarta.websocket-api from 2.0.0 to 2.1.0",
+            "url": "https://github.com/jetty-project/embedded-jetty-live-war/pull/100",
+            "state": "CLOSED",
+            "createdAt": "2022-05-05T20:17:09Z",
+            "mergedAt": null,
+            "closedAt": "2022-05-05T20:20:07Z",
+            "mergedBy": null,
+            "comments": {
+              "edges": [
+                {
+                  "node": {
+                    "body": "2.1.0 is for Jetty 12+\r\n"
+                  }
+                },
+                {
+                  "node": {
+                    "body": "OK, I won't notify you again about this release, but will get in touch when a new version is available. If you'd rather skip all updates until the next major or minor version, let me know by commenting `@dependabot ignore this major version` or `@dependabot ignore this minor version`. You can also ignore all major, minor, or patch releases for a dependency by adding an [`ignore` condition](https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#ignore) with the desired `update_types` to your config file.\n\nIf you change your mind, just re-open this PR and I'll resolve any conflicts on it."
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "number": 99,
+            "title": "Bump maven-javadoc-plugin from 3.3.2 to 3.4.0",
+            "url": "https://github.com/jetty-project/embedded-jetty-live-war/pull/99",
+            "state": "MERGED",
+            "createdAt": "2022-04-20T20:14:05Z",
+            "mergedAt": "2022-04-20T20:16:05Z",
+            "closedAt": "2022-04-20T20:16:05Z",
+            "mergedBy": {
+              "login": "joakime"
+            },
+            "comments": {
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "number": 98,
+            "title": "Bump maven-javadoc-plugin from 3.3.2 to 3.4.0",
+            "url": "https://github.com/jetty-project/embedded-jetty-live-war/pull/98",
+            "state": "MERGED",
+            "createdAt": "2022-04-20T20:13:58Z",
+            "mergedAt": "2022-04-20T20:16:01Z",
+            "closedAt": "2022-04-20T20:16:01Z",
+            "mergedBy": {
+              "login": "joakime"
+            },
+            "comments": {
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "number": 97,
+            "title": "Bump maven-javadoc-plugin from 3.3.2 to 3.4.0",
+            "url": "https://github.com/jetty-project/embedded-jetty-live-war/pull/97",
+            "state": "MERGED",
+            "createdAt": "2022-04-20T20:13:46Z",
+            "mergedAt": "2022-04-20T20:15:58Z",
+            "closedAt": "2022-04-20T20:15:58Z",
+            "mergedBy": {
+              "login": "joakime"
+            },
+            "comments": {
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "number": 96,
+            "title": "Bump maven-clean-plugin from 3.1.0 to 3.2.0",
+            "url": "https://github.com/jetty-project/embedded-jetty-live-war/pull/96",
+            "state": "MERGED",
+            "createdAt": "2022-04-04T20:24:57Z",
+            "mergedAt": "2022-04-04T20:27:59Z",
+            "closedAt": "2022-04-04T20:27:59Z",
+            "mergedBy": {
+              "login": "joakime"
+            },
+            "comments": {
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "number": 95,
+            "title": "Bump maven-surefire-plugin from 3.0.0-M5 to 3.0.0-M6",
+            "url": "https://github.com/jetty-project/embedded-jetty-live-war/pull/95",
+            "state": "MERGED",
+            "createdAt": "2022-04-04T20:24:52Z",
+            "mergedAt": "2022-04-04T20:27:55Z",
+            "closedAt": "2022-04-04T20:27:55Z",
+            "mergedBy": {
+              "login": "joakime"
+            },
+            "comments": {
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "number": 94,
+            "title": "Bump jetty.version from 11.0.8 to 11.0.9",
+            "url": "https://github.com/jetty-project/embedded-jetty-live-war/pull/94",
+            "state": "MERGED",
+            "createdAt": "2022-04-04T20:24:46Z",
+            "mergedAt": "2022-04-04T20:27:50Z",
+            "closedAt": "2022-04-04T20:27:50Z",
+            "mergedBy": {
+              "login": "joakime"
+            },
+            "comments": {
+              "edges": []
+            }
+          }
+        }
+      ]
+    }
+  }
+}
