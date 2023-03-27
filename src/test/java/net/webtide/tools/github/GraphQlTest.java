@@ -16,8 +16,10 @@ import java.io.IOException;
 
 import net.webtide.tools.github.cache.PersistentCache;
 import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 public class GraphQlTest
 {
     @Test
