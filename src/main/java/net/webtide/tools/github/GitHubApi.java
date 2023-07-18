@@ -131,7 +131,7 @@ public class GitHubApi
     public static Gson newGson()
     {
         return new GsonBuilder()
-            .registerTypeAdapter(ZonedDateTime.class, new ISO8601TypeAdapter())
+            .registerTypeHierarchyAdapter(ZonedDateTime.class, new ISO8601TypeAdapter())
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .create();
     }
