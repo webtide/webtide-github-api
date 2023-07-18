@@ -58,7 +58,7 @@ public class ProjectsTest
             {
                 if (gitUrl.startsWith("git@github.com:"))
                 {
-                    // format is git@github.com:joakime/webtide-github-api.git
+                    // format is git@github.com:<owner>/<repo-name>.git
                     gitUrl = gitUrl.replaceFirst("^git@github.com:", "");
                     gitUrl = gitUrl.replaceFirst("\\.git$", "");
                     int idxSep = gitUrl.indexOf('/');
@@ -67,7 +67,7 @@ public class ProjectsTest
                 }
                 else if (gitUrl.startsWith("https://github.com/"))
                 {
-                    // format is https://github.com/eclipse/jetty-project
+                    // format is https://github.com/<owner>/<repo-name>
                     gitUrl = gitUrl.replaceFirst("^https://github.com/", "");
                     int idxSep = gitUrl.lastIndexOf('/');
                     REPO_OWNER = gitUrl.substring(0, idxSep);
