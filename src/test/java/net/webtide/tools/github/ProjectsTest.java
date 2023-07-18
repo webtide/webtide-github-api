@@ -53,15 +53,31 @@ public class ProjectsTest
                 .setMustExist(true)
                 .build();
             String gitUrl = repository.getConfig().getString("remote", "origin", "url" );
-            // format is https://github.com/eclipse/jetty-project
+            // format is the raw string from .git/config > [remote "origin"] > url
             if (gitUrl != null && !gitUrl.isEmpty())
             {
-               int lastIdx = gitUrl.lastIndexOf('/');
-               REPO_NAME = gitUrl.substring(lastIdx + 1);
-               gitUrl = gitUrl.substring(0, lastIdx);
-               lastIdx = gitUrl.lastIndexOf('/');
-               REPO_OWNER = gitUrl.substring(lastIdx + 1);
-
+                if (gitUrl.startsWith("git@github.com:"))
+                {
+                    // format is git@github.com:joakime/webtide-github-api.git
+                    gitUrl = gitUrl.replaceFirst("^git@github.com:", "");
+                    gitUrl = gitUrl.replaceFirst("\\.git$", "");
+                    int idxSep = gitUrl.indexOf('/');
+                    REPO_OWNER = gitUrl.substring(0, idxSep);
+                    REPO_NAME = gitUrl.substring(idxSep + 1);
+                }
+                else if (gitUrl.startsWith("https://github.com/"))
+                {
+                    // format is https://github.com/eclipse/jetty-project
+                    gitUrl = gitUrl.replaceFirst("^https://github.com/", "");
+                    int idxSep = gitUrl.lastIndexOf('/');
+                    REPO_OWNER = gitUrl.substring(0, idxSep);
+                    REPO_NAME = gitUrl.substring(idxSep + 1);
+                }
+                else
+                {
+                    LOG.error("Unrecognized URI format: " + gitUrl);
+                    throw new RuntimeException("Unrecognized URI format: " + gitUrl);
+                }
             }
             else
             {
