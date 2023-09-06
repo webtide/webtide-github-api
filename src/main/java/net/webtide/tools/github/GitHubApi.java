@@ -331,7 +331,6 @@ public class GitHubApi
         {
             JsonObject entry = nodeElem.getAsJsonObject();
             JsonElement source = entry.get("source");
-            System.out.println("source = " + source.toString());
             CrossReference crossReference = gson.fromJson(source.toString(), CrossReference.class);
             if (crossReference.getUrl() == null)
                 continue; // skip
