@@ -19,13 +19,14 @@ import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Disabled("Projects (classic) not enabled")
 public class ProjectsTest
 {
-
     private static final Logger LOG = LoggerFactory.getLogger(ProjectsTest.class);
 
     private static String REPO_OWNER;

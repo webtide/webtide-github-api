@@ -16,9 +16,11 @@ import java.io.IOException;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+/**
+ * API for Projects (Classic)
+ */
 public class GitHubProjectsApi
 {
-
     private final GitHubApi gitHubApi;
 
     public GitHubProjectsApi( GitHubApi gitHubApi)
