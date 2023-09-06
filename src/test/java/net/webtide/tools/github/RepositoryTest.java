@@ -40,7 +40,7 @@ public class RepositoryTest
         Set<String> repoNames = new HashSet<>();
         repositoryStream.forEach((repo) ->
         {
-            System.out.printf("%s - %s [%s]%n", repo.getName(), repo.getUpdatedAt(), getFlags(repo));
+            // System.out.printf("%s - %s [%s]%n", repo.getName(), repo.getUpdatedAt(), getFlags(repo));
             repoNames.add(repo.getName());
         });
         assertThat(repoNames, Matchers.hasItem("logos"));
@@ -57,7 +57,7 @@ public class RepositoryTest
         Set<String> userNames = new HashSet<>();
         collaborators.forEach((collaborator) ->
         {
-            System.out.printf("%s - [%s]%n", collaborator.getLogin(), getPermissions(collaborator));
+            // System.out.printf("%s - [%s]%n", collaborator.getLogin(), getPermissions(collaborator));
             userNames.add(collaborator.getName());
         });
     }

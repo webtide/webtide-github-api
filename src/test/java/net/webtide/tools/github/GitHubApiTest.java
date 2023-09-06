@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -32,7 +33,6 @@ public class GitHubApiTest
                 .header("Accept", "application/vnd.github.v3+json")
                 .build()
         );
-        // System.out.println(body);
     }
 
     @Test
@@ -44,11 +44,12 @@ public class GitHubApiTest
         int issueNum = 10330;
         optionMap.put("ISSUENUM", Integer.toString(issueNum));
         String query = GitHubApi.loadQuery("/graphql-templates/query-prs-linked-to-issue.graphql", optionMap);
-        System.out.println(query);
+        // System.out.println(query);
         assertFalse(query.contains("@"));
     }
 
     @Test
+    @Disabled
     public void testShowEnv()
     {
         System.getenv().forEach((key, value) -> System.out.printf("[%s] -> [%s]%n", key, value));

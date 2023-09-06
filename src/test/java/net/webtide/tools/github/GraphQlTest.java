@@ -35,7 +35,7 @@ public class GraphQlTest
         {
             String search = createSearchPrs(endCursor);
             String result = github.graphql(createSearchPrs(null));
-            System.out.println(result);
+            // System.out.println(result);
         }
     }
 

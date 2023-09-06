@@ -57,7 +57,6 @@ public class IssueTimelineTest
                 .filter(event -> event.source != null)
                 .collect(Collectors.toList());
             assertEquals(1, events.size(), "Should have only 1 event with a source");
-            System.out.println("Source: " + events.get(0).source);
         }
     }
 }
