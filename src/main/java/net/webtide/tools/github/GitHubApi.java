@@ -12,9 +12,13 @@
 
 package net.webtide.tools.github;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URI;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -25,17 +29,25 @@ import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import com.google.common.base.Strings;
+import com.google.common.io.CharStreams;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import net.webtide.tools.github.cache.MemoryCache;
 import net.webtide.tools.github.gson.ISO8601TypeAdapter;
 import org.slf4j.Logger;
@@ -66,10 +78,11 @@ public class GitHubApi
             .followRedirects(HttpClient.Redirect.NEVER)
             .build();
         this.baseRequest = HttpRequest.newBuilder()
-            .header("Authorization", "Bearer " + oauthToken);
+            .header("Authorization", "Bearer " + oauthToken)
+            .header("X-GitHub-Api-Version", "2022-11-28");
         this.gson = newGson();
         this.cache = new MemoryCache();
-        gitHubProjectsApi = new GitHubProjectsApi( this);
+        gitHubProjectsApi = new GitHubProjectsApi(this);
         gitHubColumnsApi = new GitHubColumnsApi(this);
         gitHubCardsApi = new GitHubCardsApi(this);
     }
@@ -161,7 +174,6 @@ public class GitHubApi
         this.cache = cache;
     }
 
-
     public <T> T query(String path, Class<T> t, Function<HttpRequest.Builder, HttpRequest> requestBuilder) throws IOException, InterruptedException
     {
         String body = getCachedBody(path, requestBuilder);
@@ -197,7 +209,10 @@ public class GitHubApi
                     cache.saveNotFound(path);
                     throw new GitHubResourceNotFoundException(path);
                 default:
-                    throw new GitHubApiException("Unable to get [" + path + "]: status code: " + response.statusCode());
+                {
+                    LOG.warn("Failed Response: {}", response.body());
+                    throw new GitHubApiException("Unable to " + request.method() + " [" + request.uri() + "]: status code: " + response.statusCode());
+                }
             }
         }
         catch (GitHubResourceNotFoundException e)
@@ -239,6 +254,9 @@ public class GitHubApi
         return gson.fromJson(body, User.class);
     }
 
+    /**
+     * Note: does not participate in cache
+     */
     public String graphql(String query) throws IOException, InterruptedException
     {
         Map<String, String> map = new HashMap<>();
@@ -255,7 +273,11 @@ public class GitHubApi
             .build();
         HttpResponse<String> response = client.send(request, responseInfo -> HttpResponse.BodySubscribers.ofString(UTF_8));
         if (response.statusCode() != 200)
-            throw new GitHubApiException("Unable to post graphql: status code: " + response.statusCode());
+        {
+            LOG.warn("Failed Response: {}", response.body());
+            throw new GitHubApiException("Unable to " + request.method() + " to " + request.uri() + ": status code: " + response.statusCode());
+        }
+        cache.save("/graphql", response.body());
         return response.body();
     }
 
@@ -267,6 +289,87 @@ public class GitHubApi
                 .header("Accept", "application/vnd.github.v3+json")
                 .build());
         return gson.fromJson(body, Issue.class);
+    }
+
+    public IssueTimeline issueTimeline(String repoOwner, String repoName, int issueNum) throws IOException, InterruptedException
+    {
+        String path = String.format("/repos/%s/%s/issues/%d/timeline", repoOwner, repoName, issueNum);
+        String body = getCachedBody(path, (requestBuilder) ->
+            requestBuilder.GET()
+                .header("Accept", "application/vnd.github.v3+json")
+                .build());
+        return gson.fromJson(body, IssueTimeline.class);
+    }
+
+    public List<CrossReference> issueCrossReferences(String repoOwner, String repoName, int issueNum) throws IOException, InterruptedException
+    {
+        Map<String, String> optionMap = new HashMap<>();
+        optionMap.put("OWNER", repoOwner);
+        optionMap.put("REPOSITORY", repoName);
+        optionMap.put("ISSUENUM", Integer.toString(issueNum));
+        String query = loadQuery("/graphql-templates/query-issue-timeline-crossref-pullrequests.graphql", optionMap);
+        String body = graphql(query);
+        return loadCrossReferences(body);
+    }
+
+    protected static List<CrossReference> loadCrossReferences(String body)
+    {
+        Gson gson = new GsonBuilder()
+            .registerTypeHierarchyAdapter(ZonedDateTime.class, new ISO8601TypeAdapter())
+            .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+            .create();
+
+        JsonObject jsonObj = gson.fromJson(body, JsonObject.class);
+        JsonObject data = jsonObj.getAsJsonObject("data");
+        JsonObject repository = data.getAsJsonObject("repository");
+        JsonObject issue = repository.getAsJsonObject("issue");
+        JsonObject timelineItems = issue.getAsJsonObject("timelineItems");
+        JsonArray timelineArray = timelineItems.getAsJsonArray("nodes");
+
+        List<CrossReference> crossReferences = new ArrayList<>();
+        for (JsonElement nodeElem : timelineArray)
+        {
+            JsonObject entry = nodeElem.getAsJsonObject();
+            JsonElement source = entry.get("source");
+            System.out.println("source = " + source.toString());
+            CrossReference crossReference = gson.fromJson(source.toString(), CrossReference.class);
+            if (crossReference.getUrl() == null)
+                continue; // skip
+            crossReferences.add(crossReference);
+        }
+
+        return crossReferences;
+    }
+
+    public static String loadQuery(String templatePath, Map<String, String> optionMap) throws IOException
+    {
+        URL url = GitHubApi.class.getResource(templatePath);
+        if (url == null)
+            throw new FileNotFoundException("Unable to find template resource: " + templatePath);
+
+        try (InputStream in = url.openStream();
+             InputStreamReader reader = new InputStreamReader(in, UTF_8))
+        {
+            String templateStr = CharStreams.toString(reader);
+            StringBuilder output = new StringBuilder();
+            Pattern replacementPattern = Pattern.compile("@([^@]+)@");
+            Matcher matcher = replacementPattern.matcher(templateStr);
+            int offset = 0;
+            while (matcher.find(offset))
+            {
+                String key = matcher.group(1);
+                output.append(templateStr, offset, matcher.start(0));
+                String result = optionMap.get(key);
+                if (result != null)
+                    output.append(result);
+                else
+                    output.append('@').append(key).append('@'); // failed match
+                offset = matcher.end(0);
+            }
+            output.append(templateStr.substring(offset));
+
+            return output.toString();
+        }
     }
 
     public IssueEvents issueEvents(String repoOwner, String repoName, int issueNum) throws IOException, InterruptedException
@@ -317,7 +420,7 @@ public class GitHubApi
         return gson.fromJson(body, PullRequestCommits.class);
     }
 
-    public Issue getIssueFromCard(Card card)  throws IOException, InterruptedException
+    public Issue getIssueFromCard(Card card) throws IOException, InterruptedException
     {
         return GitHubApi.connect().query(card.getContentUrl(), Issue.class, builder -> builder.GET()
             .header("Accept", "application/vnd.github.v3+json")
@@ -391,7 +494,6 @@ public class GitHubApi
             activePage -> listRepositoryCollaborators(repoOwner, repoName, resultsPerPage, activePage);
         return StreamSupport.stream(new ListSplitIterator<User>(this, dataSupplier), false);
     }
-
 
     public Releases listReleases(String repoOwner, String repoName, int resultsPerPage, int pageNum) throws IOException, InterruptedException
     {

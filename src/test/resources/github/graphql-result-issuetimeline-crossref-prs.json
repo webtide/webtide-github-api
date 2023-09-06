@@ -1,0 +1,36 @@
+{
+  "data": {
+    "repository": {
+      "issue": {
+        "__typename": "Issue",
+        "number": 10330,
+        "title": "Jetty 12: ResourceService throws NPE when resource has no filesystem path",
+        "timelineItems": {
+          "nodes": [
+            {
+              "__typename": "CrossReferencedEvent",
+              "source": {
+                "createdAt": "2023-08-17T13:00:56Z",
+                "baseRef": {
+                  "prefix": "refs/heads",
+                  "name": "jetty-12.0.x"
+                },
+                "url": "https://github.com/eclipse/jetty.project/pull/10335",
+                "title": "Fix broken EE9 / EE10 DefaultServlet range requests",
+                "mergedAt": "2023-08-22T08:17:33Z",
+                "mergedBy": {
+                  "login": "lorban"
+                },
+                "state": "MERGED"
+              }
+            },
+            {
+              "__typename": "CrossReferencedEvent",
+              "source": {}
+            }
+          ]
+        }
+      }
+    }
+  }
+}

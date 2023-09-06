@@ -19,13 +19,16 @@ import java.nio.file.Path;
 
 import com.google.gson.Gson;
 import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
+import org.eclipse.jetty.toolchain.test.jupiter.WorkDirExtension;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class ChangeIssueTest
+@ExtendWith(WorkDirExtension.class)
+public class IssueTest
 {
     @Test
     public void testIssue5675() throws IOException, InterruptedException

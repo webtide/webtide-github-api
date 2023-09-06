@@ -13,8 +13,12 @@
 package net.webtide.tools.github;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class GitHubApiTest
 {
@@ -29,6 +33,19 @@ public class GitHubApiTest
                 .build()
         );
         // System.out.println(body);
+    }
+
+    @Test
+    public void testLoadQuery() throws IOException
+    {
+        Map<String, String> optionMap = new HashMap<>();
+        optionMap.put("OWNER", "eclipse");
+        optionMap.put("REPOSITORY", "jetty.project");
+        int issueNum = 10330;
+        optionMap.put("ISSUENUM", Integer.toString(issueNum));
+        String query = GitHubApi.loadQuery("/graphql-templates/query-prs-linked-to-issue.graphql", optionMap);
+        System.out.println(query);
+        assertFalse(query.contains("@"));
     }
 
     @Test

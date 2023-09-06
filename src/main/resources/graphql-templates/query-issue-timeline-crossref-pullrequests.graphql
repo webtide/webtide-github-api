@@ -1,0 +1,32 @@
+{
+  repository(owner: "@OWNER@", name: "@REPOSITORY@") {
+    issue(number: @ISSUENUM@) {
+      __typename
+      number
+      title
+      timelineItems(first: 30, itemTypes:[CROSS_REFERENCED_EVENT]) {
+        nodes {
+          ... on CrossReferencedEvent {
+            __typename
+            source {
+              ... on PullRequest {
+                createdAt
+                baseRef {
+                  prefix
+                  name
+                }
+                url
+                title
+                mergedAt
+                mergedBy {
+                  login
+                }
+                state
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
