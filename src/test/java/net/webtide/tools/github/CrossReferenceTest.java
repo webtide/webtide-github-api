@@ -77,7 +77,7 @@ public class CrossReferenceTest
     {
         GitHubApi github = GitHubApi.connect();
         github.setCache(new PersistentCache(workDir.getEmptyPathDir()));
-        List<CrossReference> crossReferences = github.issueCrossReferences("eclipse", "jetty.project", 10330);
+        List<CrossReference> crossReferences = github.issueCrossReferences("jetty", "jetty.project", 10330);
         assertNotNull(crossReferences);
     }
 }

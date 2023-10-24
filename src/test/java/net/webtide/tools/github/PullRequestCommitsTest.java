@@ -30,7 +30,7 @@ public class PullRequestCommitsTest
     public void testPullRequest5676Commits() throws IOException, InterruptedException
     {
         GitHubApi github = GitHubApi.connect();
-        PullRequestCommits commits = github.pullRequestCommits("eclipse", "jetty.project", 5676);
+        PullRequestCommits commits = github.pullRequestCommits("jetty", "jetty.project", 5676);
 
         assertNotNull(commits);
         assertEquals(8, commits.size());

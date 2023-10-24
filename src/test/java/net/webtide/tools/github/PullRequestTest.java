@@ -30,7 +30,7 @@ public class PullRequestTest
     public void testPullRequest5676() throws IOException, InterruptedException
     {
         GitHubApi github = GitHubApi.connect();
-        PullRequest pullRequest = github.pullRequest("eclipse", "jetty.project", 5676);
+        PullRequest pullRequest = github.pullRequest("jetty", "jetty.project", 5676);
 
         assertNotNull(pullRequest);
         assertEquals(5676, pullRequest.number);

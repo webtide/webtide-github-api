@@ -34,7 +34,7 @@ public class IssueTest
     public void testIssue5675() throws IOException, InterruptedException
     {
         GitHubApi github = GitHubApi.connect();
-        Issue issue = github.issue("eclipse", "jetty.project", 5675);
+        Issue issue = github.issue("jetty", "jetty.project", 5675);
 
         assertNotNull(issue);
         assertEquals(5675, issue.number);
@@ -47,7 +47,7 @@ public class IssueTest
     public void testPullRequest5676() throws IOException, InterruptedException
     {
         GitHubApi github = GitHubApi.connect();
-        Issue issue = github.issue("eclipse", "jetty.project", 5676);
+        Issue issue = github.issue("jetty", "jetty.project", 5676);
 
         assertNotNull(issue);
         assertEquals(5676, issue.number);

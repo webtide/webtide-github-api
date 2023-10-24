@@ -96,7 +96,7 @@ public class ProjectsTest
         GitHubApi github = GitHubApi.connect();
         Projects projects = github.getGitHubProjectApi().listProjects(REPO_OWNER, REPO_NAME, 0, 0);
 
-        Stream<Project> streamProjects = github.getGitHubProjectApi().streamProjects("eclipse", "jetty.project", 0);
+        Stream<Project> streamProjects = github.getGitHubProjectApi().streamProjects("jetty", "jetty.project", 0);
         LOG.info("projects list size {}, stream size: {}",projects.size(), streamProjects.count());
 
         LOG.info("projects: {}", projects);

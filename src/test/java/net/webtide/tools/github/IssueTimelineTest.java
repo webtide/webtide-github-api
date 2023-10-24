@@ -38,7 +38,7 @@ public class IssueTimelineTest
     {
         GitHubApi github = GitHubApi.connect();
         github.setCache(new PersistentCache(workDir.getEmptyPathDir()));
-        IssueTimeline timeline = github.issueTimeline("eclipse", "jetty.project", 10330);
+        IssueTimeline timeline = github.issueTimeline("jetty", "jetty.project", 10330);
         assertNotNull(timeline);
     }
 

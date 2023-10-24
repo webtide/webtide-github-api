@@ -30,7 +30,7 @@ public class CommitTest
     public void testCommit() throws IOException, InterruptedException
     {
         GitHubApi github = GitHubApi.connect();
-        Commit commit = github.commit("eclipse", "jetty.project", "5630929549a0116b977defe25d0c54de27fc10a0");
+        Commit commit = github.commit("jetty", "jetty.project", "5630929549a0116b977defe25d0c54de27fc10a0");
         assertNotNull(commit);
         assertEquals("5630929549a0116b977defe25d0c54de27fc10a0", commit.sha);
         assertEquals("igalic", commit.author.login);

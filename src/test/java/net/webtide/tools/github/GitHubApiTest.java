@@ -27,7 +27,7 @@ public class GitHubApiTest
     public void testRaw() throws IOException, InterruptedException
     {
         GitHubApi api = GitHubApi.connect();
-        String path = "/repos/eclipse/jetty.project/pulls/5676/commits";
+        String path = "/repos/jetty/jetty.project/pulls/5676/commits";
         String body = api.raw(path, (requestBuilder) ->
             requestBuilder.GET()
                 .header("Accept", "application/vnd.github.v3+json")
@@ -39,7 +39,7 @@ public class GitHubApiTest
     public void testLoadQuery() throws IOException
     {
         Map<String, String> optionMap = new HashMap<>();
-        optionMap.put("OWNER", "eclipse");
+        optionMap.put("OWNER", "jetty");
         optionMap.put("REPOSITORY", "jetty.project");
         int issueNum = 10330;
         optionMap.put("ISSUENUM", Integer.toString(issueNum));
