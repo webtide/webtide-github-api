@@ -419,6 +419,16 @@ public class GitHubApi
         return gson.fromJson(body, PullRequestCommits.class);
     }
 
+    public PullRequests commitPullRequests(String repoOwner, String repoName, String commit) throws IOException, InterruptedException
+    {
+        String path = String.format("/repos/%s/%s/commits/%s/pulls", repoOwner, repoName, commit);
+        String body = getCachedBody(path, (requestBuilder) ->
+                requestBuilder.GET()
+                        .header("Accept", "application/vnd.github.v3+json")
+                        .build());
+        return gson.fromJson(body, PullRequests.class);
+    }
+
     public Issue getIssueFromCard(Card card) throws IOException, InterruptedException
     {
         return GitHubApi.connect().query(card.getContentUrl(), Issue.class, builder -> builder.GET()
